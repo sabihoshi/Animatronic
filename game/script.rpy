@@ -1,39 +1,66 @@
-﻿# The script of the game goes in this file.
+﻿init:
 
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
+    # Backgrounds
+    $ backgroundDir    = "images/backgrounds"
 
-define e        = Character("Eileen")
-define allan    = Character("Allan")
-define boss     = Character("Boss")
-define brent    = Character("Brent")
-define manager  = Character("Manager")
-define host1    = Character("Host 1")
-define host2    = Character("Host 2")
-define maybelle = Character("Maybelle")
-define unknown  = Character("???")
-define guard    = Character("Guard")
-define mom      = Character("Mom")
-define radio    = Character("Radio")
-define robot    = Character("Robot")
+    image bg oldOffice = "[backgroundDir]/office1.png"
+    image bg newOffice = "[backgroundDir]/office2.png"
+    image bg streets   = "[backgroundDir]/street.png"
+    image bg city      = "[backgroundDir]/city.png"
+    image bg cafe      = "[backgroundDir]/cafe.png"
 
+    image cg train     = "[backgroundDir]/train.jpg"
+    
+    # Animations
+    $ animationDir = "placeholders/images/backgrounds"
+    $ screenwipe   = ImageDissolve("placeholders/images/backgrounds/screenwipe.jpg", 1, reverse=True)
+    $ dissolvelong = Dissolve(2)
+    $ fadelong     = Fade(1,1,1)
 
+    # Placeholder Character Images
+    $ placeholderDir = "placeholders/images/characters"
 
+    image brent casual surprised = "[placeholderDir]/haruka_casual_excited_surprise.png"
+    image brent casual happy     = "[placeholderDir]/haruka_casual_handfront_happy.png"
+    image brent casual neutral   = "[placeholderDir]/haruka_casual_handstogether_neutral.png"
+    image brent casual confused  = "[placeholderDir]/haruka_casual_handsbehind_sad2.png"
+    
+    image father neutral = "[placeholderDir]/father_neutral.png"
+    image father mad     = "[placeholderDir]/father_mad.png"
 
-# The game starts here.
+    image mom neutral   = "[placeholderDir]/sora_casual_tanuki_neutral.png"
+    image mom concerned = "[placeholderDir]/sora_casual_tanuki_sweatdrop.png"
+    image mom surprised = "[placeholderDir]/sora_casual_tanuki_surprise.png"
+
+    # Characters
+    define allan    = Character("Allan")
+    define boss     = Character("Boss")
+    define brent    = Character("Brent")
+    define manager  = Character("Manager")
+    define host1    = Character("Host 1")
+    define host2    = Character("Host 2")
+    define maybelle = Character("Maybelle")
+    define unknown  = Character("???")
+    define guard    = Character("Guard")
+    define mom      = Character("Mom")
+    define radio    = Character("Radio")
+    define robot    = Character("Robot")
+    define article  = Character("Article")
 
 label start:
 
     # Scene 1:
     # (Setting: Old-timey office)
     # Article
-    "A butterfly can lead to the world’s next disaster?!"
-    "Hit bestseller novel, Ripple, by newcomer writer Arthur Lexington tells a rousing tale about how a man's small and innocent action lead to a series of disasters that he must now fix."
-    "Lexington states the idea of the novel came to him when he read an article about the Chaos theory called the Butterfly Effect."
-    "The theory states that a small, seemingly minuscule action, like a flap of a butterfly, can actually lead to a huge event."
-    "When Lexington had finished reading the article, he knew this would make a great story and got to work almost immediately."
-    "This is Lexington's first ever novel and it has sold millions of copies all over Great Britain."
-    "Allan (inner thoughts): ......"
+
+    scene bg oldOffice
+
+    article "A butterfly can lead to the world’s next disaster?!"
+    article "Hit bestseller novel, Ripple, by newcomer writer Arthur Lexington tells a rousing tale about how a man's small and innocent action lead to a series of disasters that he must now fix."
+    article "Lexington states the idea of the novel came to him when he read an article about the Chaos theory called the Butterfly Effect."
+    article "The theory states that a small, seemingly minuscule action, like a flap of a butterfly, can actually lead to a huge event."
+    article "When Lexington had finished reading the article, he knew this would make a great story and got to work almost immediately."
+    article "This is Lexington's first ever novel and it has sold millions of copies all over Great Britain."
     "...."
     "Well, this is brilliant."
     "This guy just made one novel and already it's a bestseller."
@@ -46,26 +73,43 @@ label start:
     "So until I can even get a publisher to say yes to my book, I'm stuck working here."
     "At least it pays though."
     "But what I would do just to get a greenlight for my book."
-    "Not a book about some stupid "theory" about how all I have to do is step on a bug and all of a sudden there's another world war."
+    "Not a book about some stupid 'theory' about how all I have to do is step on a bug and all of a sudden there's another world war."
     "...That could just be me being salty, though."
+
+    show father mad with dissolve:
+        xanchor 0.5
+        xpos    0.5
+
     boss "Allan?"
     allan "Yeah, sir?"
+
+    show father neutral with dissolve
+
     boss "Well done on your new article. It will surely be a hit."
     "Yeah, if those paper mache guys actually read the paper. I don’t actually tell him that, though."
     allan "Thank you, sir. Is there any extra work for me to do?"
     "I don’t really have much to do but the very least I could use the time for my rent money."
     boss "No, you can have the rest of the day off if you would like."
     allan "I’ll be sure to do that."
+
+    hide father with dissolve
+    
     "My boss leaves and once again I’m left to my own devices."
     "Everyone else around here is basically doing whatever the hell they want and not doing work."
     "We barely have any stories to write about and I’m always getting a constant writer’s block so I can’t write anything."
     "With nothing else to do, I decided to leave for home and see if I can get some inspiration out there."
+
     # Scene 2:
+    scene bg city with screenwipe
+    
     "I go through the bustling streets of London, passing by vendors, covering my mouth from the smoke every now and then, swatting off beggar children on the way to my home."
     "It’s not much of a home, but really an entire floor I’ve been lended so I pay the landlord every month. It’s in decent condition and not too far from where I work; I can usually walk there within 30 minutes."
     "Everything here’s the same as I left it."
     "My dishes that I don’t bother to wash are still sitting where they are. Though next thing I know, they start shaking slightly along with some other furniture around here."
+
     # (Picture of a steampunk styled train pops up)
+    scene cg train with screenwipe
+    
     "Oh, the trains passing by again. That’s the sole reason why I could afford this place. It’s pretty close to the rails."
     "I don’t mind, though, I find it kinda nice."
     "I go to my room and find my typewriter still on its desk."
@@ -84,60 +128,102 @@ label start:
 
     # Scene 3:
     # (Setting: Street)
+    scene bg streets with screenwipe
+
     "Thanks to some contacts I have thanks to my parents, I got some really good info about something that would make a good article."
     "Zeppelins."
     "A new mode of transportation that’s in the works right now and the company that’s making it says they’re ready to announce it."
     "Apparently it involves using hot air and propellers to move around. Basically, it’s a gigantic hot air balloon."
     "But cooler."
-    "*BUMB*"
+    "{i}BUMB{/i}"
     allan "Oh, I’m so so-"
     unknown "Ah, no I’m-"
-    # (Brent surprised CG appears)
     "No way..."
     "It’s..."
+
+    show brent casual surprised with dissolvelong:
+        xanchor 0.5
+        xpos    0.5
+
     allan "Brent?"
     brent "Allan?"
     "The smile on my face grows big and I trap him in my arm."
     allan "Brent! It’s been too long!"
-    brent (Happy) "No kidding! How’ve you been doing?"
+
+    show brent casual happy with dissolve
+
+    brent "No kidding! How’ve you been doing?"
     allan "Not gonna lie, I’ve had better times."
-    brent (Normal) "Not that good, huh?"
+
+    show brent casual neutral with dissolve
+
+    brent "Not that good, huh?"
     allan "I’ve been working for a badly smalltime publisher. I’m honestly surprised I have enough money to pay rent with our sales."
     brent "Oh, that publisher? Yeah I’ve read an article you’ve written."
     brent "I was reading it at my sister’s place and when I went to the loo, my nephew used it for his arts project;"
     brent " he’s 14 and actually reads the news from time to time."
     "I freaking knew it!"
     allan "God, are we that bad?"
-    brent (Confused) "The headline in that paper was about the Queen’s new corgi."
+
+    show brent casual confused with dissolve
+
+    brent "The headline in that paper was about the Queen’s new corgi."
     allan "Yeah that’s fair."
     "This is Brent Norton, an old friend of mine back in the day."
     "Since my folks were always working and travelling to places for research, I had to stay in a boarding school to have a place to stay."
     "That's where I met Brent who was my roommate at the dorm."
     "We practically did everything together there, but by the time we graduated we lost contact."
     "This is the first time I've seen him is the last six years."
-    brent (Normal) "Say, want to head to a cafe? There's a really good one nearby where we can catch up."
+
+    show brent casual neutral with dissolve
+
+    brent "Say, want to head to a cafe? There's a really good one nearby where we can catch up."
     allan "Sure, sounds good."
 
     # Scene 4
     # Setting: Cafe
+    scene bg cafe with screenwipe
+
     "Brent wasn't kidding when he said this was a good cafe, this place was great!"
     "The barista was pleasant to talk to, the music in the radio was soothing, and the coffee is exquisite!"
-    brent (Happy) "Ah, man, this brings back memories."
+
+    show brent casual happy with dissolve:
+        xanchor 0.5
+        xpos    0.5
+
+    brent "Ah, man, this brings back memories."
     allan "Does it now?"
     brent "Yeah, you and I used to head to out to restaurants on the end of the month and spent whatever money we saved up on the place's best food."
     allan "Oh, yeah. Wow, I spent way too much money than I should have."
-    brent (Normal) "Yeah, I remember your mother wouldn't stop yelling at you that one time we spent your entire allowance."
+    
+    show brent casual neutral with dissolve
+
+    brent "Yeah, I remember your mother wouldn't stop yelling at you that one time we spent your entire allowance."
     allan "Yeah, I'm not too fond of that memory."
     brent "That reminds me, did your parents research take off?"
     allan "Kind of, but they're retired now and lent it to one of their workers. I heard they're doing good progress, though."
     brent "Hey, that's great! Why not do an article of it?"
     allan "I don't think it'll catch the eye of a lot of people. It's not really an ice breaker, honestly."
     brent "Oh, that's a shame."
-    radio *BZZT BZZT*
-    brent (Confused) "What the-"
+    radio "{i}BZZT BZZT{/i}"
+
+    show brent casual confused with dissolve
+
+    brent "What the-"
+
+    hide brent
+
     "The manager of the cafe suddenly leaves his post and starts banging on the radio."
+
+    show father mad with dissolve:
+        xanchor 0.5
+        xpos    0.3
+
     manager "Grr, stupid thing!"
     "The music in the radio finally returns, but at this point the song ended and it returns to the radio host."
+
+    show father neutral with dissolve
+
     host1 "And that was Anna Comstock’s new hit Songbird! Ah, she’s a lovely lady, ain’t she?"
     host2 "Yes, she is, George. You know I met her a couple days ago at a restaurant."
     host1 "Really now, what she like?"
@@ -158,6 +244,8 @@ label start:
 
     # (Scene 5)
     # (Setting: The front of a harbor)
+    scene cg train with screenwipe
+    
     "Crazily enough, I was almost on that ship."
     "It was twenty years ago, while my mom and dad were still researchers and I was still in boarding school and summer was approaching."
     "There was a new development in the research of my parent’s in America but I needed to be picked up from boarding school."
@@ -168,25 +256,54 @@ label start:
     "We left early so to not miss our trip. We ended up skipping breakfast and eating at a restaurant."
     "We were in a rush."
     "After eating, we rushed to the ship but halfway there my mom realized something."
+
+    show mom neutral with dissolve:
+        xanchor 0.5
+        xpos    0.3
+
     mom "Did we leave something?"
     "I looked at our bags, at first I didn’t see anything out of the ordinary but then I realized we may have missed something."
-    # ----------(Divide indicates choice-specific events. Below the first divide are the choices and their outcomes)---------------------------------------------------------
-    # Choices:
-    # - Tell mom we may have lost something.
-    # - Don’t say anything.
-    # --(If "Tell mom" was chosen)
+
+    menu:
+        "Tell mom we may have lost something.":
+            $ toldMom = True
+            jump toldMom
+
+        "Don't say anything.":
+            $ toldMom = False
+            jump notTold
+
+label toldMom:
+
+    allan "Did we forget something? I have a feeling we did."
     mom "Wait..."
+
+    show mom concerned with dissolve
+    
     "My mom looked through our bags again, that was when her eyes widened."
+
+    show mom surprised with dissolve
+
     mom "The gifts! We forgot the gifts!"
     "Realizing our terrible mistake, mom and I rushed back to the restaurant we ate at and, luckily enough, the lady at the store kept it with her."
     "Unfortunately, since the restaurant was pretty far from the harbor, the ship left without us."
     "Mom and I had to buy new tickets and missed my Grandad’s birthday by a day. He wasn’t mad at us, thank god, and my family had to stay there for a few more days to make up for lost time."
-    # --(If "Don’t say anything" was chosen)
+
+    jump toldContinue
+
+label notTold:
+
     mom "Hmm... no, I don’t think so."
     "My mom looked a bit unsure though and for the rest of the way to the ship she was taking a double look on our bags."
     "We made it to the line and at the moment we were boarding the ship, my mom finally realized it."
+
+    show mom surprised with dissolve
+
     mom "Oh my god, we left our gifts!"
     guard "Do you have a problem, ma’am?"
+
+    show mom concerned with dissolve
+
     mom "Oh, uh, yes..."
     guard "Are you going to board, ma’am?"
     "My mom looked at her bags, then at me, then at the line."
@@ -198,27 +315,45 @@ label start:
     "The people in the line were all giving us the dirty eye, except for a little girl my age who looked just as confused as I was."
     "The ship left soon after, without us and quite a handful of passengers thanks to us."
     "We went back to the restaurant we ate at and got our stuff back thanks to the owner who kept it with her."
-    # ----(Below the second divide are events and dialogues that happen regardless of choice)------------------------------------------------------------------------
 
+    jump toldContinue
+
+label toldContinue:
     # (Scene 6)
     # (Setting: Back to the cafe)
-    brent "(Confused) 'Allan?'"
+    # Confused
+    show bg cafe with screenwipe
+    show brent casual confused with dissolve:
+        xanchor 0.5
+        xpos    0.5
+
+    brent "Allan?"
     allan "Huh?"
     brent "Are you in there, mate? I lost you for a second there."
     allan "Ah, sorry. Just reminiscing."
-    brent (Neutral) "About what?"
+    
+    show brent casual neutral with dissolve
+
+    brent "About what?"
     allan "Well..."
     "I tell Brent about the what happened twenty years ago with my mom."
-    brent  (Surprised) "Damn, that nearly happened?"
+
+    show brent casual surprised with dissolve
+
+    brent "Damn, that nearly happened?"
     allan "Yup."
-    # ----------------------------------------------------------------------------------------------------
-    # (If "Tell mom" was chosen)
-    brent (Neutral) "You could’ve been one of the victims if you hadn’t told your mom."
-    # (If "Don’t say anything" was chosen)
-    brent (Neutral) "You could’ve been one of the victims if your mom didn’t realize it then."
-    allan "Yeah, looks like lady luck was on our side that day."
-    brent "Yeah, thank god."
-    # ----------------------------------------------------------------------------------------------------
+
+    show brent casual neutral with dissolve
+
+    if toldMom:
+        $toldMom = False
+        brent "You could’ve been one of the victims if you hadn’t told your mom."
+    
+    else:
+        brent "You could’ve been one of the victims if your mom didn’t realize it then."
+        allan "Yeah, looks like lady luck was on our side that day."
+        brent "Yeah, thank god."
+    
     allan "Enough about me, though, what have you been doing after graduation?"
     brent "I’m glad you asked. I’m actually a Private Investigator."
     allan "Really now? I figured, though."
@@ -228,13 +363,15 @@ label start:
     allan "Your side of the room was covered in investigation maps and you rambled to the school cat about your theories."
     brent "At least the cat wanted to listen."
     allan "He looked just as done with you as I was."
-    # Despite
-    "Brent closes his eyes for a moment and rests his hand on his chin."
-    brent (Thinking) "Hmm..."
+    "We kept talking for a while about the old times."
+    "Brent, out of nowhere though, closes his eyes for a moment and rests his hand on his chin."
+    #Thinking
+    brent "Hmm..."
     brent "Y’know Allan, you don’t have a story right now, do you?"
     allan "I was on my way to the one I was going to write about, why?"
-    I take another sip from my coffee.
-    brent (Neutral) "Well, I was thinking maybe you’d like to help me with this case."
+    "I take another sip from my coffee."
+    #Neutral
+    brent "Well, I was thinking maybe you’d like to help me with this case."
     "Then I empty the contents of it back into the cup in one spit."
     allan "WHAT?"
     brent "Well, you and I used to be great back in the day, remember?"
@@ -252,7 +389,8 @@ label start:
     "And this might make a good novel"
     "..."
     allan "Yeah, sure, screw it. I’m down for it!"
-    brent (Smiling) "That’s what I’m talking about! Man, this is gonna be like old times. Ready to solve this case, buddy?"
+    #Smiling
+    brent "That’s what I’m talking about! Man, this is gonna be like old times. Ready to solve this case, buddy?"
     allan "You bet I am!"
     "And just like that, Brent and I went to work on the case."
     # (Screen fades to black)
@@ -263,8 +401,10 @@ label start:
     "We left the cafe soon after. After taking a fairly long ride on the monorail here in the city, Brent took me into this building ways off from the city."
     "Why the hell would anyone want to live somewhere as far this?"
     allan "So, Sherlock, what’s the case for today?"
-    brent (Smiling) "Well, Watson, it’s a simple case. One might say its..."
-    brent (Neutral) "Well actually, it’s NOT elementary. It’s pretty interesting."
+    #Smiling
+    brent "Well, Watson, it’s a simple case. One might say its..."
+    #Neutral
+    brent "Well actually, it’s NOT elementary. It’s pretty interesting."
     allan "Really? How so?"
     brent "Nothing too bad, the very least. It’s a missing person case."
     allan "Missing person? Who’s missing?"
@@ -294,10 +434,12 @@ label start:
     # (Picture of a steampunk robot appears (doesn’t have to be our drawing))
     "Woah, what the heck?"
     "Is this supposed to be...a butler?"
-    brent (Confused) "Did not see this coming..."
+    #Confused
+    brent "Did not see this coming..."
     "Looks like Brent is just as astonished as I am."
     allan "Wait, you’ve never seen this before?"
-    brent (Neutral) "Nope, first time I’ve been here."
+    #Neutral
+    brent "Nope, first time I’ve been here."
     brent "Looks like this thing is supposed to answer to Mr. Bradley."
     robot "What can I do for you, Professor Bradley?"
     allan "Looks like it."
@@ -306,9 +448,11 @@ label start:
     brent "I don’t think so."
     robot "What can I do for you, Professor Bradley?"
     allan "Okay, this thing is starting to get on my nerves, what should we do with it?"
-    brent (Thinking) "Hmmm..."
+    #Thinking
+    brent "Hmmm..."
     "Brent places his hand on his chin and thinks. After a short while, his signature smile crepts up."
-    brent (Smiling) "Hey, can you get me a snack, perhaps?"
+    #Smiling
+    brent "Hey, can you get me a snack, perhaps?"
     robot "Of course, Professor Bradley."
     "The robot leaves us and enters a room a bit farther down."
     allan "You’re not thinking about abusing the system, are you?"
@@ -413,7 +557,8 @@ label start:
     unknown "Um, who are you?"
     allan "Hm?"
     # (Maybelle portrait appears)
-    unknown (Confused) "How did you get in here?"
+    #Confused
+    unknown "How did you get in here?"
     "Ah, crud."
     allan "Uh, well you see, ma’am..."
     brent "Allan, find something?"
@@ -427,7 +572,8 @@ label start:
     allan "Yeah, a very old friend. My name’s Allan Lorenz."
     maybelle "Maybelle Bradley. I’m a receptionist here for my brother’s workshop."
     allan "Oh, you’re Mr. Bradley’s sister?"
-    maybelle (Smiling) "Yup, nice to meet you Mr. Lorenz."
+    #Smiling
+    maybelle "Yup, nice to meet you Mr. Lorenz."
     allan "Just ‘Allan’ is fine."
     maybelle "Okay."
     brent "Allan is a journalist. He’s helping me with the case."
@@ -448,11 +594,14 @@ label start:
     # -No need to ask.
     # --(If "Why get Brent" was chosen)
     allan "No offense to my friend here but why get Brent to help? Couldn’t the police  work too?"
-    maybelle (Neutral) "I tried that, but they didn’t take me seriously."
+    #Neutral
+    maybelle "I tried that, but they didn’t take me seriously."
     allan "What? It’s a missing person!"
-    maybelle (Angry) "That’s what I said! But they said my brother was probably just hiding somewhere cooped up and working on his new, and I quote, contraption."
+    #Angry
+    maybelle "That’s what I said! But they said my brother was probably just hiding somewhere cooped up and working on his new, and I quote, contraption."
     allan "Why are they like that?"
-    maybelle (Sad) "Well, my brother is a bit weird for some people’s standards."
+    #Sad
+    maybelle "Well, my brother is a bit weird for some people’s standards."
     allan "Your brother is a genius though, right?"
     maybelle "He is! Lewis’s brilliant and works really hard. He’s just...well..."
     maybelle "People just don’t understand him."
@@ -462,19 +611,22 @@ label start:
     "Hmm..."
     # --(If "When did you last see your brother" was chosen)
     allan "When did you last see your brother?"
-    maybelle (Neutral) "Four weeks ago. Right in this same workshop."
+    #Neutral
+    maybelle "Four weeks ago. Right in this same workshop."
     brent "According to Ms. Bradley, Lewis was working on this new robot for this company. He worked day and night for it."
     maybelle "Sometimes I find him asleep on his desk, working on the robot."
     maybelle "On the day he got the job, he never stopped working. I got worried about him but he kept insisting he kept on going."
     maybelle "Then on the first monday of the month, he wasn’t in the workshop."
-    maybelle (Sad) "He just disappeared."
+    #Sad
+    maybelle "He just disappeared."
     brent "She went to me after a week went by with no sign of him."
     brent "That leads us to today."
     "Hmm..."
     "Four weeks ago, huh?"
     # --(If "Can you tell me about your brother" was chosen)
     allan "Tell me more about Lewis."
-    maybelle (Neutral) "Well, he’s an inventor as you can see."
+    #Neutral
+    maybelle "Well, he’s an inventor as you can see."
     "I turn my head towards the robot."
     allan "Yeah, I can see that. He’s working on robots."
     maybelle "He calls it animatronics."
@@ -484,7 +636,8 @@ label start:
     allan "He’s working on robots, though."
     maybelle "I know, but he wants more people to know about him and get more clients to get more money. He wants to make robots to help him in inventing."
     allan "Not humans?"
-    maybelle (Sad) "No, he doesn’t exactly trust humans with his inventions."
+    #Sad
+    maybelle "No, he doesn’t exactly trust humans with his inventions."
     maybelle "He says humans always make mistakes and needs his inventions to be one hundred percent flawless."
     allan "That’s a lot to ask for, even for a robots."
     maybelle "It is. He works days and nights to make sure they’re on top condition."
@@ -505,7 +658,8 @@ label start:
     allan "Yeah you’re right. This IS bad."
     brent "Wait, let me see."
     "I hand Brent the book and he inspects the contents."
-    brent (Thinking) "Yeah, I can see it."
+    #Thinking
+    brent "Yeah, I can see it."
     maybelle "That’s why my brother works so hard. He focuses on quality than quantity."
     maybelle "At least in my eyes, my brother’s wishes are justifiable."
     allan "How so?"
@@ -531,7 +685,8 @@ label start:
     maybelle "Yup, everyone scrambled to get on the boats. The rule was mother and children first. But..."
     maybelle "They could only fit two people left on the lifeboat we found."
     maybelle "My father rationalized waiting for another lifeboat could mean our death so... he and mother agreed to let us go in the lifeboat."
-    brent (Sad) "So you two could live."
+    #Sad
+    brent "So you two could live."
     maybelle "Yes. Mother assured us they would get on the next boat, but from the look on her face, I figured we’d never see her again."
     maybelle "We got on the boat and it drifted off into the ocean. We watched as the boat started to sink as people upon people fell to their deaths."
     maybelle "And I swear I could see my parents clinging on the table before falling to their deaths."
@@ -565,7 +720,8 @@ label start:
     maybelle "We all worry about him. He’s brilliant but we don’t think he should go far for us."
     # ----------------------------------------------------------------------------------------------------
     brent "Thank you for telling us, Ms. Bradley. Telling us was probably not easy."
-    maybelle (Neutral) "It’s nothing, really. It is nice to get it out every once in a while."
+    #Neutral
+    maybelle "It’s nothing, really. It is nice to get it out every once in a while."
     "Brent looks back at the book."
     "Eventually, he grabs me and reels me in."
     brent "Allan, look at this."
@@ -579,9 +735,11 @@ label start:
     brent "Anyway what’s important here is that he’s the last client. Look at the date. He made the request some time well before Lewis went missing."
     allan "Seriously?"
     brent "We need a lead, and looks like Burns is the best one we got."
-    maybelle (Sad) "Good luck getting through him. He might not even listen to you."
+    #Sad
+    maybelle "Good luck getting through him. He might not even listen to you."
     allan "Okay, well he’s owns a huge corporation, how are we going to find him."
-    brent (Smiling) "Oh that’s easy, I know where he lives."
+    #Smiling
+    brent "Oh that’s easy, I know where he lives."
     allan "You do?"
     brent "Yup, saw him on my way back from a case. I know it’s his home because it has the logo for his company."
     allan "Well, that’s a lead too. Let’s go find him."
@@ -592,7 +750,8 @@ label start:
     # Scene 8
     # (Setting: in front of a house)
     allan "This is his place?"
-    brent (Neutral) "Yeah, surprisingly normal right?"
+    #Neutral
+    brent "Yeah, surprisingly normal right?"
     "Yeah I expected a mansion. Not a simple big house on the hill somewhere."
     brent "Well, let’s go ring him up."
     "Brent presses the doorbell."
@@ -603,7 +762,7 @@ label start:
     brent "It’s 16:00, he has to be home."
     "Brent grabs the door knob."
     "Yeah, like turning it would-"
-    "*Creeeeeeaaak*"
+    "{i}Creeeeeeaaak{/i}"
     "The door swings open, as easy as 123."
     brent "Unlocked door..."
     allan "Nobody answering the door."
@@ -640,13 +799,13 @@ label start:
     "It’s an empty hallway."
     allan "Hello?"
     "No answer."
-    "*THUMP* *THUMP*"
+    "{i}THUMP{/i} {i}THUMP{/i}"
     "It’s coming from a room."
-    "*KNOCK* *KNOCK*"
+    "{i}KNOCK{/i} {i}KNOCK{/i}"
     allan "Anyone in there?"
     "No answer again."
     "..."
-    "*CREEEEAAAK*"
+    "{i}CREEEEAAAK{/i}"
     "I didn’t open that."
     "I walk inside, the room’s completely dark, except for the light from the moon."
     allan "Hello?"
@@ -663,7 +822,7 @@ label start:
     "Later..."
     brent "Allan? Allan?"
     brent "I heard some knocking up here, was that you?"
-    "*CREEEAAAK*"
+    "{i}CREEEAAAK{/i}"
     brent "Gah!"
     brent "Jesus, man you scared me!"
     "..."
@@ -692,13 +851,13 @@ label start:
     "He reaches his hand for the door, not the doorknob though."
     "He looks and me and fakes a knocking motion."
     "I nod, looks like he’s trying to tell me to get ready."
-    "*KNOCK* *KNOCK* *KNOCK*"
+    "{i}KNOCK{/i} {i}KNOCK{/i} {i}KNOCK{/i}"
     "We wait for a response. Nothing at first."
     "Brent knocks again."
-    "*KNOCK* *KNOCK* *KNOCK*"
+    "{i}KNOCK{/i} {i}KNOCK{/i} {i}KNOCK{/i}"
     "......"
     "......"
-    "*CRAAAAASH*"
+    "{i}CRAAAAASH{/i}"
     "What the-"
     brent "Oh shit!"
     "We bust the door open and run in."

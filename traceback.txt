@@ -1,0 +1,27 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 340, in script
+    robot "What can I do for you, Professor Bradley?"
+NameError: name 'Surprised' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 340, in script
+    robot "What can I do for you, Professor Bradley?"
+  File "C:\Users\CIIT_1\Downloads\renpy-7.2.2-sdk\renpy\ast.py", line 664, in execute
+    who = eval_who(self.who, self.who_fast)
+  File "C:\Users\CIIT_1\Downloads\renpy-7.2.2-sdk\renpy\ast.py", line 568, in eval_who
+    return renpy.python.py_eval(who)
+  File "C:\Users\CIIT_1\Downloads\renpy-7.2.2-sdk\renpy\python.py", line 1961, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "C:\Users\CIIT_1\Downloads\renpy-7.2.2-sdk\renpy\python.py", line 1954, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 'Surprised' is not defined
+
+Windows-8-6.2.9200
+Ren'Py 7.2.2.491
+Animatronic 1.0
+Tue Apr 30 11:59:08 2019
