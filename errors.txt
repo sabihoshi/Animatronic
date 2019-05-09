@@ -2,9 +2,10 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 33: expected expression
-    image mom surprised = 
-                          ^
+File "game/script.rpy", line 274: invalid syntax
+    $ _preferences.set_volume('sound', 0.5)
+     ^
+    
 
 Ren'Py Version: Ren'Py 7.2.2.491
-Tue Apr 30 11:57:13 2019
+Fri May 10 02:30:28 2019
