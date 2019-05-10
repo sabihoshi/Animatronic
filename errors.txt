@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 274: invalid syntax
-    $ _preferences.set_volume('sound', 0.5)
-     ^
-    
+File "game/script.rpy", line 1252: end of line expected.
+    hide simon with dissolve:
+                            ^
 
 Ren'Py Version: Ren'Py 7.2.2.491
-Fri May 10 02:30:28 2019
+Fri May 10 11:58:05 2019

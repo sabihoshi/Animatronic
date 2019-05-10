@@ -386,7 +386,7 @@ style main_menu_frame:
     xsize 280
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    background "images/backgrounds/steampunk_train.jpg"
 
 style main_menu_vbox:
     xalign 1.0
