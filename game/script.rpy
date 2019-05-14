@@ -15,6 +15,7 @@
     image bg sewers     = "[backgroundDir]/sewers.jpg"
     image bg warehouse  = "[backgroundDir]/warehouse.jpg"
     image bg factory    = "[backgroundDir]/factory.jpg"
+    image bg corridor   = "[backgroundDir]/corridor.jpg"
 
     image cg steampunkT = "[backgroundDir]/steampunk_train"
     image cg train      = "[backgroundDir]/train.jpg"
@@ -649,7 +650,7 @@ label desk:
         "The man has his arm around the shoulder of the girl. They’re both smiling brightly."
         "I look at year it’s signed. Looks like the photo was recently taken"
 
-    elif !toldMom:
+    elif not toldMom:
         "It’s a family photo."
         "There’s the parents standing behind their two children."
         "Behind them is a cruise."
@@ -1216,13 +1217,24 @@ label brentFirst:
     "What the-"
     brent "Oh shit!"
     "We bust the door open and run in."
+
+    scene bg corridor with screenWipe
+
     "It’s an abandoned room, practically nothing in here."
     "Except for a broken window."
+
+    show brent confused with dissolve:
+        xanchor 0.5
+        xpos    0.5
+
     brent "Not good!"
     "We hurriedly look out the window."
     "At first I couldn’t find anyone in the roofs of London."
     "But then I saw it."
     allan "Over there!"
+
+    hide brent
+
     "I point at a roof far from us."
     "There’s a man standing there."
 
@@ -1255,6 +1267,7 @@ label brentFirst:
     hide brent
 
     # Chapter 2
+    scene bg frontHouse with screenwipe
     show simon neutral with dissolve:
         xanchor 0.5
         xalign 0.55
@@ -3014,19 +3027,19 @@ label warnBrent:
     "It goes to me and hands me a bronze key."
     "I take it and use it to open the drawer."
 
-    if toldMom && wroteTo == "Clark" && pocket:
+    if toldMom and wroteTo == "Clark" and pocket:
         $ chosenRoute = "Accomplice"
 
-    elif (toldMom && wroteTo == "Queen") || (!toldMom && wroteTo == "Queen" && pocket):
+    elif (toldMom and wroteTo == "Queen") or (!toldMom and wroteTo == "Queen" and pocket):
         $ chosenRoute = "Lewis"
 
-    elif (toldMom && put == "Bag") || (!toldMom && put == "Pocket"):
+    elif (toldMom and put == "Bag") or (!toldMom and put == "Pocket"):
         $ chosenRoute = "Maybelle"
 
-    elif (!toldMom && put == "Bag"):
+    elif (!toldMom and put == "Bag"):
         $ chosenRoute = "Simon"
 
-    if (chosenRoute == "Accomplice") || (chosenRoute == "Lewis"):
+    if (chosenRoute == "Accomplice") or (chosenRoute == "Lewis"):
         "There’s a bunch of tapes."
         "And a journal?"
         "I take the journal and flip through it."
@@ -3114,7 +3127,7 @@ label warnBrent:
 
     # Scene 4:
     # --(If the player is on the Maybelle route or Accomplice route)--------------------
-    if chosenRoute == "Maybelle" || chosenRoute == "Accomplice"):
+    if chosenRoute == "Maybelle" or chosenRoute == "Accomplice"):
 
         "It takes me two hours to get to the Bradley’s home."
         "It’s actually kind of a nice place to live in."
@@ -3298,6 +3311,9 @@ label hideCloset:
     "Except to the roof of the next door neighbor."
     "Don’t have more options, so I just go for it and take a leap."
     "I land on the roof tiles and slide down them onto the lawn."
+
+    scene bg frontHouse with screenwipe
+
     "The owner of the house goes outside and confronts me."
     man "Hey, what’s the big idea?"
     allan "Sorry, I’ll pay the damages, tab it to Alexander Lorenz!"
@@ -3306,23 +3322,45 @@ label hideCloset:
     "I run and head straight for the cafe where I would meet Brent."
 
     # --(If the player is NOT on the Maybelle route or the Accomplice Route)-------
-    if (chosenRoute != "Maybelle") && (chosenRoute != "Accomplice"):
+    if (chosenRoute not "Maybelle") and (chosenRoute != "Accomplice"):
+        scene bg frontHouse with screenwipe
+
         "It takes me two hours to get to the Bradley’s home."
         "It’s actually kind of a nice place to live in."
         "I knock on the door."
+
+        play sound door_knock
+
         "To my surprise, the door actually opens."
         "Maybelle was actually home."
+
+        show maybelle with dissolve:
+            xanchor 0.5
+            xpos    0.5
+
         maybelle "Oh, Allan, I didn’t know you know where I lived."
         allan "Did some sleuthing, found out where you and your brother lived."
         maybelle "Sleuthing, huh? At this point you can become a detective like Mr. Norton."
         allan "Heh, maybe."
+
+        show maybelle neutral with dissolve
+
         maybelle "Would you like to come in?"
         "I nod and head inside."
-        "It’s a quaint place, has a nice "home" feeling into it."
+        "It’s a quaint place, has a nice 'home' feeling into it."
+
+        show maybelle happy with dissolve
+
         maybelle "Um..."
         allan "Something wrong?"
+
+        show maybelle confused with dissolve
+
         maybelle "Is Mr. Norton not with you?"
         allan "We’re investigating separately right now. I’m here to find anything that’s worth checking."
+
+        show maybelle neutral with dissolve
+
         maybelle "No clues here, I told Mr. Norton that. My brother kept everything business in his workshop."
         "I nod in understanding, guess I didn’t have to go here."
 
@@ -3331,8 +3369,13 @@ label hideCloset:
         "Not that I need any clues. I got more than enough but..."
         "Can I really tell her?"
 
+    show maybelle sad with dissolve
+
     maybelle "To be honest, I wanted to apologize."
     allan "To Brent?"
+
+    show maybelle neutral with dissolve
+
     maybelle "Yes, I shouldn’t have slapped him. He’s just doing his job as an investigator."
     maybelle "To be honest, I may have had some suspicions towards my brother. He’s not exactly stable, like I said. It’s just that..."
     allan "He’s your brother?"
@@ -3366,6 +3409,9 @@ label hideCloset:
         allan "Maybelle, listen,"
         "I turn to her, I’m suddenly filled with conviction."
         allan "I don’t think you’re brother’s it."
+
+        show maybelle confused with dissolve
+
         maybelle "You don’t?"
         allan "No, and I think neither does Brent."
         allan "We’ve been finding evidences lately that don’t point to him anymore and we have a new lead that can hopefully prove your brother’s innocence."
@@ -3387,38 +3433,62 @@ label hideCloset:
         "Time to end this."
 
         # Scene 5:
+        scene bg cafe with screenwipe
         "15:00."
         "I stay at the cafe and drink as much coffee as I can."
         "I’m gonna need all of that later just in case."
         "It takes a while, but Brent finally makes it."
+
+        show brent neutral with dissolve:
+            xanchor 0.5
+            xpos    0.5
+
         brent "Hey, how was your investigation?"
         allan "Eventful."
         brent "Define that."
         allan "I found those tapes you mentioned."
         brent "Oh good. The voice doesn’t fit, right?"
         allan "Yeah, for sure. Too different. The one I saw was a tape about a voice synthesizer."
+
+        show brent confused with dissolve
+
         brent "A what now?"
         allan "A device that makes your voice different when you speak into it."
         brent "Oh."
         "Before I can say something again, Brent’s eyes widened and he slaps his hand on his face."
+
+        show brent happy with dissolve
+
         brent "AHHH! The voice synthesizer! How could I forget?!"
         allan "You know about it?"
         brent "Yeah, I played with it for an hour!"
         "..."
+
+        show brent thinking with dissolve
+
         brent "..."
         brent "Don’t tell Ms. Bradley I said that."
         allan "Uh, sure."
+
+        show brent neutral with dissolve
+
         brent "Anyway, this makes this case even MORE annoying to solve!"
         allan "What?! How?"
         brent "I think the Ghepetto Killer got his hands on that device and has been using it to hide his voice."
         "Oh."
         "OH."
         "OH CRAP!"
+
+        show brent surprised with dissolve
+
         brent "Literally anyone we can think off in the top of our heads could be the Killer. And the only way to know their identity is if we go with goddamn Hawkins!"
 
     # --(If the player is on the Lewis route)----------------------------------------------------
     if chosenRoute == "Lewis":
         allan "Okay, calm down, did you find anything about LeBlanc?"
+
+        show brent thinking with dissolve
+
         brent "No, I was suspicious of him because he kept making it to the crime scenes pretty fast. Turns out it was just luck that got him by."
         allan "Seems to be a common trend lately."
         brent "Yeah, but our lucks ran out. We got no more leads."
