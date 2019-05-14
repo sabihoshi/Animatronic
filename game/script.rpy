@@ -21,9 +21,9 @@
 
     # Animations
     $ animationDir   = "placeholders/images/backgrounds"
-    $ screenwipe     = ImageDissolve("placeholders/images/backgrounds/screenwipe.jpg", 1, reverse=True)
-    $ dissolvelong   = Dissolve(2)
-    $ fadelong       = Fade(1,1,1)
+    $ screenWipe     = ImageDissolve("placeholders/images/backgrounds/screenwipe.jpg", 1, reverse=True)
+    $ longDissolve   = Dissolve(2)
+    $ longFade       = Fade(1,1,1)
 
     # Placeholder Character Images
     $ placeholderDir = "placeholders/images/characters"
@@ -58,6 +58,8 @@
     image maybelle happy    = "[characterDir]/maybelle_happy.png"
     image maybelle neutral  = "[characterDir]/maybelle_neutral.png"
     image maybelle sad      = "[characterDir]/maybelle_mad.png"
+    image maybelle mad      = "[characterDir]/maybelle_mad.png"
+    image maybelle very mad = "[characterDir]/maybelle_very_mad.png"
 
     image simon neutral     = "[characterDir]/simon_neutral.png"
     image simon happy       = "[characterDir]/simon_happy.png"
@@ -81,7 +83,7 @@
 
     define police    = Character("Policeman")
     define leblanc    = Character("LeBlanc")
-    
+
     define chambers  = Character("Chambers")
     define reception = Character("Receptionist")
     define host1     = Character("Host 1")
@@ -125,6 +127,7 @@
     define audio.metal_wheels = "sounds/effects/metal_wheels.mp3"
     define audio.metal_bang   = "sounds/effects/Metal_Bang.wav"
     define audio.gun_empty    = "sounds/effects/Gun_Empty.wav"
+    define audio.remote_click = "sounds/effects/Remote_Beep.wav"
 
 label start:
     play music "placeholders/sound/music/Thanks.ogg" fadeout 1.5 loop
@@ -171,7 +174,7 @@ label start:
     boss "No, you can have the rest of the day off if you would like."
     allan "I’ll be sure to do that."
 
-    hide father with fadelong
+    hide father with longFade
 
     "My boss leaves and once again I’m left to my own devices."
     "Everyone else around here is basically doing whatever the hell they want and not doing work."
@@ -179,7 +182,7 @@ label start:
     "With nothing else to do, I decided to leave for home and see if I can get some inspiration out there."
 
     # Scene 2:
-    scene bg city with screenwipe
+    scene bg city with screenWipe
 
     "I go through the bustling streets of London, passing by vendors, covering my mouth from the smoke every now and then, swatting off beggar children on the way to my home."
     "It’s not much of a home, but really an entire floor I’ve been lended so I pay the landlord every month. It’s in decent condition and not too far from where I work; I can usually walk there within 30 minutes."
@@ -187,7 +190,7 @@ label start:
     "My dishes that I don’t bother to wash are still sitting where they are. Though next thing I know, they start shaking slightly along with some other furniture around here."
 
     # (Picture of a steampunk styled train pops up)
-    scene cg train with screenwipe
+    scene cg train with screenWipe
 
     "Oh, the trains passing by again. That’s the sole reason why I could afford this place. It’s pretty close to the rails."
     "I don’t mind, though, I find it kinda nice."
@@ -207,7 +210,7 @@ label start:
 
     # Scene 3:
     # (Setting: Street)
-    scene bg streets with screenwipe
+    scene bg streets with screenWipe
 
     "Thanks to some contacts I have thanks to my parents, I got some really good info about something that would make a good article."
     "Zeppelins."
@@ -222,7 +225,7 @@ label start:
     "No way..."
     "It’s..."
 
-    show brent surprised with dissolvelong:
+    show brent surprised with longDissolve:
         xanchor 0.5
         xpos    0.5
 
@@ -263,7 +266,7 @@ label start:
 
     # Scene 4
     # Setting: Cafe
-    scene bg cafe with screenwipe
+    scene bg cafe with screenWipe
 
     "Brent wasn't kidding when he said this was a good cafe, this place was great!"
     "The barista was pleasant to talk to, the music in the radio was soothing, and the coffee is exquisite!"
@@ -333,7 +336,7 @@ label start:
 
     # (Scene 5)
     # (Setting: The front of a harbor)
-    scene cg train with screenwipe
+    scene cg train with screenWipe
 
     "Crazily enough, I was almost on that ship."
     "It was twenty years ago, while my mom and dad were still researchers and I was still in boarding school and summer was approaching."
@@ -469,7 +472,7 @@ label toldContinue:
     "We kept talking for a while about the old times."
     "Brent, out of nowhere though, closes his eyes for a moment and rests his hand on his chin."
 
-    show brent thinking with dissolvelong
+    show brent thinking with longDissolve
 
     brent "Hmm..."
     brent "Y’know Allan, you don’t have a story right now, do you?"
@@ -503,13 +506,13 @@ label toldContinue:
     allan "You bet I am!"
     "And just like that, Brent and I went to work on the case."
 
-    scene bg black with dissolvelong
+    scene bg black with longDissolve
 
     "I wish I knew at the time how much that decision changed everything."
 
     # Scene 7
     # (Setting: In front of a building, victorian era)
-    scene bg city with screenwipe
+    scene bg city with screenWipe
 
     "We left the cafe soon after. After taking a fairly long ride on the monorail here in the city, Brent took me into this building ways off from the city."
     "Why the hell would anyone want to live somewhere as far this?"
@@ -547,7 +550,7 @@ label toldContinue:
     "He turns the key inside the keyhole and the door swings open."
 
     # (Setting changes to a steampunk styled workshop)
-    scene bg workshop with screenwipe
+    scene bg workshop with screenWipe
 
     "As soon as we step inside, loud sounds of metal clanking was heard."
     "Engines started springing into life, sounds of smoke puffing out and what sounded like wheels turning."
@@ -675,7 +678,7 @@ label cabinet:
     "Forgot how much of a smartass he can be,"
     allan "Whatever, do you have the keys for them or not?"
 
-    show brent neutral
+    show brent neutral with dissolve
 
     brent "No I don’t, ask the robot. I’m sure it can help you."
     "I glance at the robot again."
@@ -708,6 +711,9 @@ label cabinet:
     "What in the world is he doing?"
     "I put it back where I found it and locked the cabinet."
 
+    jump continueCheck
+
+label desk:
     "I walk to the front desk, not finding much back in my side."
     "I figured the front desk should have something."
     "That’s when I see it."
@@ -735,7 +741,6 @@ label cabinet:
     jump continueCheck
 
 label continueCheck:
-
     show maybelle neutral with dissolve:
         xanchor 0.5
         xpos 0.5
@@ -810,13 +815,19 @@ label whyGet:
     maybelle "Well, my brother is a bit weird for some people’s standards."
     allan "Your brother is a genius though, right?"
     maybelle "He is! Lewis’s brilliant and works really hard. He’s just...well..."
+
     show maybelle happy with dissolve
+
     maybelle "People just don’t understand him."
     "Man, I’m starting to feel bad for this guy."
+
     show maybelle neutral with dissolve
+
     "But the list of people in this log book proved he is good at what he does."
     "So why the hell do people treat him like that?"
+
     show maybelle confused with dissolve
+
     "Hmm..."
 
 label seeBrother:
@@ -826,7 +837,9 @@ label seeBrother:
 
     maybelle "Four weeks ago. Right in this same workshop."
     brent "According to Ms. Bradley, Lewis was working on this new robot for this company. He worked day and night for it."
+
     show brent neutral with dissolve
+
     maybelle "Sometimes I find him asleep on his desk, working on the robot."
     maybelle "On the day he got the job, he never stopped working. I got worried about him but he kept insisting he kept on going."
     maybelle "Then on the first monday of the month, he wasn’t in the workshop."
@@ -836,9 +849,12 @@ label seeBrother:
     maybelle "He just disappeared."
     brent "She went to me after a week went by with no sign of him."
     brent "That leads us to today."
+
     show brent confused with dissolve
+
     "Hmm..."
     "Four weeks ago, huh?"
+
     jump brotherContinue
 
 label tellBrother:
@@ -870,6 +886,7 @@ label tellBrother:
     allan "That’s a lot to ask for, even for a robots."
     maybelle "It is. He works days and nights to make sure they’re on top condition."
     "Talk about a hard worker. I hope he doesn’t kill himself out of exhaustion."
+
     jump brotherContinue
 
 label brotherContinue:
@@ -896,10 +913,9 @@ label brotherContinue:
     maybelle "Well..."
 
     if toldMom:
-
         $toldMom = True
-        
         show maybelle neutral with dissolve
+
         maybelle "Back in the day, it was me, my brother, and our parents. We were a very happy family."
         maybelle "Our parents were also inventors, they were my brother’s inspirations; he really looked up to them."
         maybelle "They struggled to make ends meet, like my brother, but we were happy nonetheless."
@@ -919,12 +935,14 @@ label brotherContinue:
         maybelle "I see you’re both surprised. Yes, we boarded that ship. All the way to the Atlantic to get to America. I think you can guess what happens next."
 
         show brent neutral with dissolve
+
         allan "The sinking..."
         maybelle "Yup, everyone scrambled to get on the boats. The rule was mother and children first. But..."
         maybelle "They could only fit two people left on the lifeboat we found."
         maybelle "My father rationalized waiting for another lifeboat could mean our death so... he and mother agreed to let us go in the lifeboat."
+
         show maybelle neutral with dissolve
-        show brent happy with dissolvelong
+        show brent happy with dissolve
 
         brent "So you two could live."
 
@@ -944,18 +962,29 @@ label brotherContinue:
         maybelle "I worry about him. He’s all I have left."
 
     elif !toldMom:
-
         $toldMom = False
 
         maybelle "Back in the day, it was me, my brother, and our parents. We were a very happy family."
         maybelle "Our parents were also inventors, they were my brother’s inspirations; he really looked up to them."
         maybelle "They struggled to make ends meet, like my brother, but we were happy nonetheless."
         maybelle "My parents always worked hard for us. I remember there was this big business trip my parents were supposed to go to, they even brought us with them."
+
+        show maybelle sad with dissolve
+
         maybelle "But...we got delayed. Actually, our trip was cancelled."
+
+        show brent mad with dissolve
+
         brent "What, how?"
         maybelle "I don’t remember, it was twenty years ago."
         maybelle "Anyway, when it got cancelled our parents were frantic because it could mean the end for their career."
+
+        show maybelle neutral with dissolve
+
         maybelle "Luckily it wasn’t, but my parents had to work twice as hard that time to compensate for the loss."
+
+        show brent neutral with dissolve
+
         brent "Guess being a workaholic runs in the family."
         maybelle "Yeah, I guess."
         maybelle "Anyway, my parents didn’t make enough money to happily retire and my brother found that fact as an injustice."
@@ -965,6 +994,8 @@ label brotherContinue:
         allan "So he keeps working."
         maybelle "Exactly."
         maybelle "We all worry about him. He’s brilliant but we don’t think he should go far for us."
+
+    show brent neutral with dissolve
 
     brent "Thank you for telling us, Ms. Bradley. Telling us was probably not easy."
 
@@ -996,14 +1027,16 @@ label brotherContinue:
     allan "You do?"
     brent "Yup, saw him on my way back from a case. I know it’s his home because it has the logo for his company."
     allan "Well, that’s a lead too. Let’s go find him."
+
     show maybelle happy with dissolve
+
     maybelle "Good luck, you two. And please bring my brother back."
     brent "We’ll do what we can."
     "I nod back and then the two of us head out."
 
     # Scene 8
     # (Setting: in front of a house)
-    scene bg frontHouse with screenwipe
+    scene bg frontHouse with screenWipe
 
     allan "This is his place?"
 
@@ -1049,7 +1082,7 @@ label brotherContinue:
     "Brent goes to the left and I later head to the right."
     "I search around the house for signs of Burns, sadly not a lot I could find."
     "Aside from a bunch of paintings of who I'm assuming are old family members there's nothing out of the ordinary."
-    
+
     play sound footsteps
 
     allan "Hm?"
@@ -1098,7 +1131,7 @@ label investigateFirst:
     allan "Hello?"
     "Then I hear footsteps, someone’s coming out of the shadows."
 
-    show ghepetto with dissolvelong:
+    show ghepetto with longDissolve:
         xanchor 0.5
         xpos 0.5
 
@@ -1113,7 +1146,6 @@ label investigateFirst:
     "Later..."
 
     hide ghepetto
-
     play sound person_bump
 
     brent "Allan? Allan?"
@@ -1121,7 +1153,7 @@ label investigateFirst:
     show brent confused with dissolve:
         xanchor 0.5
         xpos    0.5
-    
+
     play sound door_creak
 
     brent "Gah!"
@@ -1136,12 +1168,12 @@ label investigateFirst:
     brent "Hey, listen, don’t assume I swing that way but..."
     brent "Have your eyes always been that glossy?"
 
-    scene bg gameOver with fadelong
+    scene bg gameOver with longFade
 
     return
 
 label brentFirst:
-    
+
     "Yeah no, I've read enough horror books to know that's a bad idea."
     "I walk around the house until I find Brent."
     allan "Hey, Brent."
@@ -1165,17 +1197,17 @@ label brentFirst:
     "He reaches his hand for the door, not the doorknob though."
     "He looks and me and fakes a knocking motion."
     "I nod, looks like he’s trying to tell me to get ready."
-    
+
     play sound door_knock
 
     "We wait for a response. Nothing at first."
     "Brent knocks again."
-    
+
     play sound door_knock
 
     "......"
     "......"
-    
+
     play sound door_break
 
     show brent surprised with dissolve:
@@ -1194,7 +1226,7 @@ label brentFirst:
     "I point at a roof far from us."
     "There’s a man standing there."
 
-    show ghepetto with dissolvelong:
+    show ghepetto with longDissolve:
         xanchor 0.5
         xpos 0.75
 
@@ -1219,9 +1251,10 @@ label brentFirst:
     "A body, a body was there."
     "Still, hanging from his arms."
     "With no skin, and no jaw."
-    hide brent
-    # Chapter 2
 
+    hide brent
+
+    # Chapter 2
     show simon neutral with dissolve:
         xanchor 0.5
         xalign 0.55
@@ -1230,6 +1263,7 @@ label brentFirst:
     show brent neutral with dissolve:
         xanchor 0.5
         xpos    0.25
+
     police "So, the two of you found that body there?"
     brent "Yes."
     police "And the door was unlocked when you found it..."
@@ -1248,7 +1282,7 @@ label brentFirst:
     leblanc "Yes?"
     allan "We have an alibi. We met up with a woman before this, Maybelle Bradley. You can confirm with her that we didn’t exactly have time to kill him."
     leblanc "Well, alright. I’ll check it with her. But don’t think you two aren’t out of my radar yet! I’m watching the two of you!"
-    
+
     hide simon with dissolve
 
     "..."
@@ -1270,26 +1304,40 @@ label brentFirst:
     allan "WHAT! With the police here?"
     brent "It’s a risky move, but since I’m a licensed private eye I’m allowed to check the scene and look at the body."
     brent "Besides, I think that would lower their suspicion of us. Why would the culprits look for clues in their crime scene, right?"
-    show brent thinking with dissolve    
+
+    show brent thinking with dissolve
+
     allan "To look for the evidence against them and get rid of it and any charges against them?"
     brent "..."
     allan "..."
     brent "Look, I promised Maybelle we’d solve this case so let’s get on it."
     "Heh, heh, looks like I got ‘im."
+
     show brent happy with dissolve
+
     "We approach LeBlanc as he’s talking to one of his officers."
+
     show simon neutral with dissolve
+
     leblanc "So the same way?"
     police "Yup, we’re sure it was him."
     brent "Sure it’s who, Simon?"
+
     show brent surprised with dissolve
+
     leblanc "Ugh, you’re still here, Norton?"
+
     show simon mad with dissolve
+
     "LeBlanc signals his officer away and holds a piece of paper in his hands."
     brent "My client was the one who sent me here, I have every right to investigate the scene as much as you, Simon."
+
     show brent neutral with dissolve
+
     leblanc "Of course you do, what do you want?"
+
     show simon neutral with dissolve
+
     brent "You said you know who the culprit is?"
     leblanc "Well, kinda. We know who the culprit is, we just don’t know  their identity?"
     allan "Their identity?"
@@ -1299,7 +1347,9 @@ label brentFirst:
     leblanc "Hm, well alright."
     leblanc "Anyway, yes, we don’t know their identity; we only got a name for him."
     brent "What’s that?"
+
     show brent thinking with dissolve
+
     leblanc "The Ghepetto Killer."
     allan "Woah... how’d you come up with a name like that?"
     leblanc "From one of the ways they left their victims. Hanging from a string looking like a puppet."
@@ -1310,17 +1360,27 @@ label brentFirst:
     allan "Fourth?!"
     leblanc "Yup, three other ones."
     brent "Any patterns between the victims?"
+
     show brent neutral with dissolve
+
     leblanc "Nope, even worse we can’t identify the victims."
+
     show simon neutral with dissolve
+
     brent "Why not?"
     leblanc "The skin is removed, without it we can’t find fingerprints. Not only that, but also the jaw is missing. We can’t use their teeth to find their identity. No other credentials were found with the body."
+
     show simon mad with dissolve
+
     brent "What about location?"
+
     show brent thinking with dissolve
+
     leblanc "All in abandoned warehouses."
     brent "Damn, this guy left no trace, did he?"
+
     show brent thinking with dissolve
+
     leblanc "And no M.O we can find."
     leblanc "Anyway, I need to get going. I’ll see you two when I see you."
     "LeBlanc heads to his carriage and leaves us to our own devices."
@@ -1328,10 +1388,14 @@ label brentFirst:
     "I nod back, and the two of us go in."
     "Brent shows his license to the guard and allows us to go investigate."
     brent "Alright, if I were a sleazy capitalist who probably pissed off the wrong people, where would I keep my contacts?"
+
     show brent thinking with dissolve
+
     allan "...I’m sorry, what?"
     brent "If he was in contact with Lewis Bradley, he probably exchanged letters with him a bunch of times. We can use those letters to hopefully find a lead."
+
     show brent thinking with dissolve
+
     allan "What if they contacted each other through telephone?"
     brent "We’ll just have to hope they haven’t. Right now, a letter is out best bet."
     "Brent sure does like to rely on luck."
@@ -1339,20 +1403,28 @@ label brentFirst:
     "He had always relied on hunches and they almost always have never been wrong before."
     allan "Okay, you’re the expert."
     brent "Glad you trust me. Now where does a capitalist keep his letters in a place like this?"
+
     show brent thinking with dissolve
+
     "Brent stands there, clearly pondering, and so do I."
     "After a couple of minutes, the revelation pops in our heads."
     allanbrent "His office!"
+
     show brent smiling with dissolve
+
     "Though the joy quickly flushed out of me when I realized where the office was."
     allan "I...think I know where that is. Let’s go."
     "I head upstairs with Brent in tow. He followed me where the office was."
     "Scratch that, where I found Burns’ CORPSE."
     brent "Son of a- of course it’s here!"
+
     show brent surprised with dissolve
+
     allan "Makes the most sense. If he was at home, one of the best places to get killed in would be an office."
     brent "Let’s just go in and look for clues."
+
     show brent neutral with dissolve
+
     "I go in first and Brent follows."
     "Looks like the police already made their mark in here."
     allan "You think there’s anything left we can find?"
@@ -1365,7 +1437,9 @@ label brentFirst:
     "Oh..."
     allan "Hey, I think I found something."
     brent "What is it?"
+
     show brent thinking with dissolve
+
     "I grab the stack of paper I found."
     "Like I suspected, they’re business letters."
     "Brent takes them from me and goes through them one by one."
@@ -1376,7 +1450,9 @@ label brentFirst:
     brent "Yup."
     allan "As in EXACTLY four weeks ago."
     brent "Yeah, that’s what I-"
+
     show brent surprised with dissolve
+
     "Brent eyes widened"
     "Looks like he finally caught on to what I mean."
     "I take a letter from him and read the contents."
@@ -1384,7 +1460,9 @@ label brentFirst:
     "Hugo Chambers"
     allan "Chambers..."
     brent "Another successful capitalist. Looks like the two were working with each other."
+
     show brent thinking with dissolve
+
     allan "Along with the other guys here?"
     brent "Probably, why?"
     "Hmm..."
@@ -1397,7 +1475,9 @@ label brentFirst:
     maybelle "You can call me ‘Maybelle’ now, Allan. I like to believe we’re better acquainted with each other to go beyond last name basis."
     allan "Oh, uh, well, thank you, Maybelle."
     brent "I can hear the butterflies flap in your stomach."
+
     show brent smiling with dissolve
+
     allan "You can’t hear a butterfly flap, let alone in a stomach!"
     maybelle "Umm..."
     allan "Oh, sorry, just talking to Brent."
@@ -1410,11 +1490,15 @@ label brentFirst:
     allan "Okay how about... an Elliot Hayes?"
     maybelle "Oh, yes, he’s here too."
     allan "That was fast."
+
     show allan surprised with dissolve
+
     maybelle "That’s because he’s before Chambers."
     allan "He’s what?!"
     brent "What’s wrong?"
+
     show brent thinking with dissolve
+
     allan "A transaction was made by Hayes right before Chambers."
     brent "What? Give me the phone, I want to talk to Ms. Bradley."
     "I hand the phone to Brent and he begins talking to Ms. Bradley."
@@ -1422,7 +1506,9 @@ label brentFirst:
     "..."
     brent "Ah, shit, he is?"
     "Interesting..."
+
     show brent neutral with dissolve
+
     brent "Allan, give me the names of the other two."
     allan "Right."
     "I read the other two letters and read aloud the recipients."
@@ -1434,16 +1520,22 @@ label brentFirst:
     maybelle "Also here, before Hawkins."
     "Brent takes the phone back to him."
     brent "Thank you, Ms. Bradley. We’ll take it from here."
+
     show brent happy with dissolve
+
     allan "Uh, bye, Maybelle."
     maybelle "Goodbye, Allan."
     "Maybelle hangs up from the other end, leaving me and Brent alone."
     brent "You two are getting chummy, ain’t ya?"
+
     show brent smiling with dissolve
+
     allan "Shut up!"
     "Brent laughs a bit, but then his face turns serious."
     brent "So, all five of these guys were all clients of Lewis, not only that but they were also his clients in a row."
+
     show brent neutral with dissolve
+
     allan "Does that mean anything or is that just a coincidence?"
     brent "We won’t know unless we investigate it."
     allan "What’s the plan?"
@@ -1452,11 +1544,13 @@ label brentFirst:
     brent "10:00 tomorrow, let’s meet at that cafe we went to and head to Chambers’ office."
     allan "Alright, listen it’s late, I think I should head back to my apartment."
     brent "Sure, you’ll need the energy tomorrow. See you there, my friend."
+
     show brent smiling with dissolve
+
     allan "See ya, Brent."
     # Scene 2
 
-    scene bg cafe with screenwipe
+    scene bg cafe with screenWipe
     "The next day, Brent and I meet up at the cafe."
     "We then leave and head to the Chambers’ office."
     brent "Hey, listen I’ve been thinking about that thought you had."
@@ -1470,7 +1564,9 @@ label brentFirst:
     brent "Chambers’ business is creating suits, Burns’ runs a bank."
     allan "Maybe he was asking for a loan?"
     brent "Those two and three others? Unless Chambers’ agreed to make them uniforms for all their companies, I doubt they would hold a PRIVATE meeting just for that."
+
     show brent neutral with dissolve
+
     allan "So uniforms is still in the air for possibilities?"
     brent "Get in the head of a capitalist, Allan, why would your workers need uniforms if they’re going to work in a factory?"
     allan "Okay, okay, point taken."
@@ -1479,11 +1575,15 @@ label brentFirst:
     play sound footsteps
     "In cue, a carriage stopped in front of the office. Stepping out of it was a man being followed by a couple of policemen."
     brent "Now."
+
     show brent neutral with dissolve
+
     "We walk and stop Chambers in front of his office."
     chambers "Anything I can do for you two?"
     brent "Actually, yeah. We would like to ask you a few questions."
+
     show brent confused with dissolve
+
     chambers "For what?"
     "Brent opens his mouth, but he shuts it quickly."
     "I guess saying directly the case isn’t a good idea."
@@ -1495,7 +1595,9 @@ label brentFirst:
     chambers "What the hell, I’m not busy. Meet me in my office upstairs."
     "He leaves with his bodyguards and steps in his office."
     brent "Nice recovery."
+
     show brent smiling with dissolve
+
     allan "Thanks, you learn a lot when you’re a journalist."
     "We head in and go upstairs."
     "We find his guards standing in front of a door."
@@ -1504,18 +1606,24 @@ label brentFirst:
     chambers "Alright boys, what would you like to know."
     "Brent and I nod at each other and he steps up."
     brent "What was your relationship with Burns?"
+
     show brent neutral with dissolve
+
     chambers "Burns?"
     allan "Yes, have you two worked with each other?"
     chambers "You aren’t implicating me for something, are you?"
     brent "We aren’t implicating you, are we, partner?"
+
     show brent smiling with dissolve
+
     allan "No, absolutely not."
     brent "We would just like to know since there has been word going around the two of you have been meeting up?"
     "Chambers stays silent, and I think his body tenses up as well."
     chambers "I just asked him for a loan."
     brent "Just a loan?"
+
     show brent surprised with dissolve
+
     chambers "Just a loan?"
     "Brent and I look at each other, I guess that was an easy question to answer regarding a banker."
     allan "Okay, how about Hawkins?"
@@ -1526,10 +1634,14 @@ label brentFirst:
     chambers "Even people as old as me can have friends as young as you, son."
     "Brent looks at me and furiously shakes his head. He then drags me off to the otherside of the room."
     brent "Allan, don’t say anything that sounds remotely insulting. We want his cooperation as much as possible."
+
     show brent neutral with dissolve
+
     allan "Right, right sorry. Anyway, this is getting us nowhere; he keeps dodging the questions. I say we drop the big guns."
     brent "Big guns...?"
+
     show brent confused with dissolve
+
     "I walk back over to Chambers and I get my notebook, pretending to write something."
     "I think it makes it look more convincing."
     allan "Next question, what was your relationship between you, Charles Hawkins, and Lewis Bradley."
@@ -1551,36 +1663,52 @@ label brentFirst:
     chambers "I won’t be badgered by these questions anymore. Take them out now!"
     "The guards nod to him and next thing I know the two of us are outside."
     brent "You know what you’re doing, huh?"
+
     show brent neutral with dissolve
+
     allan "Okay, so maybe being a journalist doesn’t translate well with being a detective."
     allan "Sorry, Brent."
     brent "It’s okay, judging by Chambers’ reaction to your questions we were getting on to something."
+
     show brent neutral with dissolve
+
     allan "You think so?"
     brent "Yeah, I think he knows something about Lewis."
+
     show brent thinking with dissolve
+
     allan "Well, how do we investigate? He locked us out."
     brent "Don’t worry, there’s a way. What time is it now?"
+
     show brent thinking with dissolve
+
     "That’s a weird question to ask."
     "I look at my watch and read the time."
     allan "Almost noon."
     brent "Good, follow me, I have an idea."
+
     show brent smiling with dissolve
+
     "I follow brent to the back of the building."
     "There’s a fire escape at the back."
     brent "I think that escape leads to the hallway that Chambers’ office is located in."
     brent "We just need him and his guards out. How much longer until noon?"
+
     show brent neutral with dissolve
+
     allan "Um, it’s noon now actually."
     brent "We can’t waste time then. Come on, follow me."
+
     show brent neutral with dissolve
+
     "Brent climbs up the fire escape and I follow suit. He ducks under an open window but peers through it; I do the same."
     "The two guards are still standing there, but soon Chambers’ walks out as well."
     "He tells the guards something but I can’t read lips."
     "The guards nod at him and the three leave the hallway."
     brent "It’s noon, right? Y’know what time is noon?"
+
     show brent smiling with dissolve
+
     "I wonder for a moment, and then it hits me."
     allan "Lunchtime!"
     "Brent quickly shushes me and clamps my mouth."
@@ -1600,42 +1728,60 @@ label brentFirst:
     "If that’s not a sign, I don’t know what is."
     "I read the first paper I found, it was made two months ago for Elliot Hayes."
     brent "Find something?"
+
     show brent confused with dissolve
+
     allan "Yeah, a letter for Hayes."
     "I give it to Brent and he starts scanning it."
     brent "Mr. Bradley is mentioned here."
+
     show brent surprised with dissolve
+
     allan "Seriously?"
     "He nods."
     brent "With a mention of a ‘body’."
+
     show brent confused with dissolve
+
     "I take a big gulp, that’s a BIG red flag."
     allan "Define ‘body’?"
     brent "I’m...not sure. It says here, quote, ‘Bradley lacks the parts nor the funds for it. I suggest Burns starts paying for it once my contract is done.’"
+
     show brent neutral with dissolve
+
     allan "Wait, so he knew Burns was going to create a contract with Lewis?"
     brent "Sounds like it, yeah. But why?"
+
     show brent neutral with dissolve
+
     "I scratch my head, this really doesn’t make sense. I get another letter and read its contents."
     "It’s not for one of the clients, but instead someone I’ve never heard before."
     "It also mentions...."
     allan "Hey, was Chambers a devout Christian?"
     brent "What makes you say that?"
+
     show brent confused with dissolve
+
     allan "There’s a letter here mentioning bishops. What does he want with the Church?"
     "Brent eyes widens at the word of 'bishops.'"
     brent "How is it spelt?"
+
     show brent neutral with dissolve
+
     allan "I’m sorry?"
     brent "Bishops. Is there a capital ‘B’ in all of its mentions."
     "I scan the letter again."
     "Just like Brent said, all of mention of 'Bishop' has its B capitalized."
     allan "Uh, yeah."
     brent "Son of a- they have ties to them?!"
+
     show brent surprised with dissolve
+
     allan "To who?"
     brent "I’ll tell you later. We just got another lead. Let’s get the hell out of here before Chambers gets back."
+
     show brent neutral with dissolve
+
     "I quickly put back the letters where I found them and we quickly leave the office."
     "We climb back out through the window and down the fire escape."
     "After we distance quite a bit from the office, I finally asked Brent."
@@ -1647,14 +1793,16 @@ label brentFirst:
     "Woah, wait, hold the phone!"
     allan "They have ties to a gang!"
     brent "And one of the more ruthless one’s too. Looks like these guys are more corrupt than we thought."
+
     show brent neutral with dissolve
+
     allan "You aren’t thinking about confronting them, are you?"
     brent "No choice, it’s out best lead. I know where they gather. Just stick by me."
     "I gulp and I nod."
     "Brent and I head get a carriage."
 
     # Scene 3
-    scene bg cafe with screenwipe
+    scene bg cafe with screenWipe
     "The carriage takes us into a bar."
     "It’s not far from the office, but far enough to not be able to walk here."
     "At least in short notice."
@@ -1664,33 +1812,45 @@ label brentFirst:
     show brent neutral with dissolve:
         xanchor 0.5
         xpos    0.5
-        
+
     brent "I guess."
+
     show brent thinking with dissolve
+
     "Brent holds his chin and scans the entire bar."
     brent "If I had to guess everyone in this bar are members of the Bishops."
     "I’m pretty sure Brent unintentionally said that loud enough for the whole bar to hear."
     "The music stops playing and all sounds stop in an instant."
     "The entire bar then turn their heads to us."
-    show brent confused with dissolvelong
+    show brent confused with longDissolve
     brent "Did I say something wrong?"
     "A big guy with a cigar from a far stands up and walks towards us."
     bishop1  "You got a problem wit’ us, mate?"
+
     show brent confused with dissolve
+
     brent "Um...no?"
     bishop1 "Well how da hell did ya know we lot here are Bishops?"
+
     show brent surprised with dissolve
+
     brent "Are you denying that or-"
     "Another Bishop stands up, knocking his chair down."
     bishop2 "And what if we were deniyin’ it? You got a problem wit’ that?"
     "I nudge Brent as hard as I can with my arm."
+
     show brent surprised with dissolve
+
     allan "This is a bad idea....! We need to go...!"
+
     show brent thinking with dissolve
+
     brent "Not until we get our answers."
     bishop1 "Answer you say? What are you a cop?"
     "At the word 'cop', like fifteen other people started standing up and started to walk to us."
+
     show brent thinking with dissolve
+
     brent "A private eye?"
     bishop2 "Oh, private eye, well ‘aye, aye’ to you sir."
     "The Bishop salutes to Brent and a couple of people laugh it off."
@@ -1701,11 +1861,13 @@ label brentFirst:
     "From afar, I heard the sound of a piece of wood being broken."
     "I look over at the direction and see the piece of wood being thrown at the guy in front of me."
     bishop1 "What exactly does a private eye want wit’ us?"
+
     show brent neutral with dissolve
+
     brent "Just to ask questions...?"
     "Brent and I slowly back off to the door, but then two other beefy guys show up and block our only exit."
     bishop1 "Questions for a case?"
-    show brent confused 
+    show brent confused
     brent "Yes...?"
     bishop1 "Sorry, lads."
     bishop1 "But the Bishops don’t tell no secrets!"
@@ -1723,10 +1885,14 @@ label brentFirst:
     bishopb "We need to do this! Bring them to me."
     "The two guys let us go and the Bishops start to back away from us."
     "Nervously, we walk to the bar counter."
+
     show brent thinking with dissolve
+
     brent "Why did you save us?"
     bishopb "Killing isn’t in our morals; we don’t condone it."
+
     show brent surprised with dissolve
+
     brent "Seriously?"
     bishopb "Yes, you also mention Old Man Chambers?"
     "The two of us nod. The Boss gestures to us to the seats next to him."
@@ -1741,13 +1907,17 @@ label brentFirst:
     "Brent hits my arm again, I turn to him and he just puts his finger on his lips and shushes."
     "Right, don’t say something remotely insulting."
     bishopb "What do you two want to know about?"
+
     show brent confused with dissolve
+
     brent "What kind of business did Chambers have with you guys?"
     "The Boss takes another drink from his mug."
     bishopb "Ah, yes, that was a long time ago."
     allan "When did you stop doing business with him?"
     bishopb "Last month, really. But yes, he and some other capitalists did business with us."
+
     show brent confused with dissolve
+
     brent "Other?"
     bishopb "You see, back then, him and some of his friends came to us to strike a deal."
     bishopb "It was a simple job, find some doctors and threaten them for a discount on medicine for them specifically."
@@ -1761,14 +1931,18 @@ label brentFirst:
     bishopb "Then I found a missing person poster for one of the people they asked me to bring."
     "Our eyes widen."
     bishopb "I confronted them about it. Y’see, threatening and things like that is something we don’t mind doing, but killing is a level we will never stoop to. They denied my accusations when I said they killed them so I later broke off our contract and never spoke to them again."
+
     show brent confused with dissolve
+
     brent "If you knew about this why didn’t you call the police?"
     bishopb "Brilliant idea, kid, a crime boss going to the police about a crime some people were doing that I was involved in. Yeah, that won’t get me to prison."
     "Brent huffed as the Boss took another drink."
     bishopb "Sorry, kid, but I like my freedom. Besides I don’t got evidence to point at them."
     allan "So why talk to us?"
     bishopb "Because you two are smart, I can tell. You went to us directly wanting to know what the hell Chambers is doing. If anyone is going to catch those bastards and what they’re doing I think it will be you two."
-    show brent neutral
+
+    show brent neutral with dissolve
+
     brent "Finding the truth of this case might get you guys in trouble, though."
     bishopb "Well, then I have time to find a lawyer. Whatever happens to us, or at least the ones involved, me included, is our own fault. We never condone killing, even if we are indirectly responsible."
     "For some reason, I find some new respect for these guys."
@@ -1781,7 +1955,9 @@ label brentFirst:
     bishopb "Ah, yes, they mention a Bradley."
     "A Bradley."
     "I looked over to Brent, there were only two Bradleys right now."
-    show brent neutral
+
+    show brent neutral with dissolve
+
     brent "Which one?"
     bishopb "Can’t remember. It was a really long time ago. It was one of their last request before I decided to break off."
     "I’m pretty sure I’m out of questions for him."
@@ -1795,13 +1971,17 @@ label brentFirst:
     allan "Yeah, we would like to talk to Mr. Chambers."
     "With the info we got from the Bishops, there’s no doubt in my mind that Chambers has something to do with Lewis’ disappearance."
     reception "Sorry, but Mr. Chambers is unavailable right now."
+
     show brent surprised with dissolve
+
     brent "He’s what?"
     reception "Yeah, he and his guards left during lunch break."
     "I curse to myself, they slipped past us while we were out."
     "We head back out and I talk to Brent."
     allan "You think they’re trying to run from us?"
+
     show brent neutral
+
     brent "I don’t know about the guard but Chambers is for sure."
     allan "How do we find them?"
     brent "Same way we found our last lead."
@@ -1811,13 +1991,17 @@ label brentFirst:
     "Though knowing the rich bastard, he’d probably have..."
     allan "Found it."
     "I switch on the lights in the room."
+
     show brent neutral
+
     brent "Man’s got electricity running in his office, should’ve known."
     "These damn rich people and their luxuries."
     allan "We need to hurry, people will notice the light’s on so find what we need."
     "Brent nods, and we head to the desk."
     "There are two papers there."
+
     show brent thinking with dissolve
+
     brent "Were those always there?"
     "I shrug, and I take the paper on top."
     "'Winchester Building, Westminster Abbey' it says."
@@ -1827,7 +2011,9 @@ label brentFirst:
     brent "I dunno, but it’s worth checking."
     "I nod, but I also grab the other letter."
     "It looks like a standard business letter, it’s not addressed to any of the clients we’re investigating, instead its recipient is 'Kasper Clark'."
+
     show brent thinking with dissolve
+
     brent "Clark?"
     allan "I know that guy, he was a capitalist who was arrested for smuggling opium to China, right?"
     brent "He was. Why is there a letter for him here out in the open?"
@@ -1840,7 +2026,7 @@ label brentFirst:
     "Clark..."
 
     # Scene 4:
-    scene bg oldOffice with dissolvelong
+    scene bg oldOffice with longDissolve
     "Remember that gazette I hate working for?"
     "Well, when I was starting to work there I was a bit thrilled."
     "And in need for rent."
@@ -1849,7 +2035,7 @@ label brentFirst:
     "Or about the famed capitalist Kasper Clark who plans on extending his work to China."
     "On one hand it’s about the queen, and everyone loves to hear about the queen."
     "On the other, it’s very informative and more important to know about in today’s time."
-    
+
     menu:
         "Write about Clark, the queen’s story is overrated.":
             $ wroteTo = "Clark"
@@ -1894,32 +2080,37 @@ label writeContinue:
     "The more stories I wrote, the lesser people bothered to read them, the more I got discouraged into even wanting to work here."
 
     # Scene 5
-    scene bg city with screenwipe
+    scene bg city with screenWipe
     show brent neutral with dissolve:
         xanchor 0.5
         xpos 0.5
+
     brent "Allan, are you spacing again?"
     allan "Hm?"
     brent "Something up?"
     allan "Sorry, I was just thinking about Kasper Clark."
     brent "Oh, what about him?"
+
     show brent thinking with dissolve
+
     allan "Well..."
-    
+
     if wroteTo == "Clark":
 
         allan "I wrote an article about him and his new business plan. It was my first article working for the gazette."
         brent "Oh, yeah, I know."
-        show brent neutral with dissolve
+
+    show brent neutral with dissolve
+
         allan "You do?"
         brent "Yeah, remember when I said I read an article? Well the article was the Clark incident. You mentioned his partner company in China and I remember they were rumors about them being smugglers."
         brent "In a few days I was able to find proof they were smuggling opium and forwarded it to the police."
         allan "Oh..."
         brent "So in a sense I should thank you. I wouldn’t have solved that case if you hadn’t wrote that article."
         allan "Don’t mention it."
-    
+
     elif wroteTo == "Queen":
-        
+
         allan "I had a choice between writing about the queen and writing about Clark when I first wrote for the gazette."
         allan "Ended up writing about the queen."
         brent "Oh."
@@ -1929,7 +2120,7 @@ label writeContinue:
         brent "Find someone’s relative working for him. But I couldn’t find any clues or evidences. It wasn’t until LeBlanc arrested him that I was able to find the lost relative, though that took a year’s time."
         allan "First hard case for you?"
         brent "Yeah, basically."
-    
+
     "The carriage stops and I look out. We’re by Westminster."
     brent "Let’s go."
     "We head out and walk down Westminster Abbey. The slums are as dirty and dark as one would think."
@@ -1937,20 +2128,26 @@ label writeContinue:
     "We make it to the Winchester building."
     brent "Guard up. This looks suspicious."
     "I nod and we go in carefully."
-    scene bg black with screenwipe
+    scene bg black with screenWipe
     "It’s dark..."
-    scene bg warehouse with screenwipe
+    scene bg warehouse with screenWipe
     "I can only make out the a few stuff in here."
     "I think it’s a warehouse?"
     "Wha-?"
     unknown "So you’ve come."
     "Who...?"
-    show ghepetto with dissolve 
+
+    show ghepetto with dissolve
+
     brent "Are you the Ghepetto Killer?"
+
     show brent confused with dissolve
+
     "Getting straight to the point??? Is that a good idea???"
     unknown "A fitting name... I like it."
+
     show ghepetto with dissolve
+
     allan "Do you know where Chambers is?"
     ghepetto "Oh..you mean..."
     "He points somewhere behind us."
@@ -1958,49 +2155,69 @@ label writeContinue:
     "The window lights up, there’s three silhouettes."
     allan "Is that..."
     ghepetto "Chambers and his two bodyguards, yes."
-    show ghepetto with dissolve 
+
+    show ghepetto with dissolve
+
     allan "Why are they here?"
     ghepetto "To pay for their crimes."
+
     show ghepetto with dissolve
+
     brent "Crimes?"
+
     show brent confused with dissolve
+
     ghepetto "You two are still unaware. No surprise there. Mankind is so ignorant to things that serves no interest to them. They show no consideration to others unless it serves them. Like survival, or money..."
-    
+
     if wroteTo == "Clark":
         ghepetto "Or maybe even fame. Isn’t that correct, Brent?"
-        show ghepetto with dissolvelong
+        show ghepetto with longDissolve
         brent "...How do you know my name?"
-        show brent confused with dissolve
+
+    show brent confused with dissolve
+
         ghepetto "Have you, Brent Norton, even consider the weight of your actions? How arresting one man could hurt or change anything?"
-        show ghepetto with dissolve
+
+    show ghepetto with dissolve
+
         brent "I’ve no idea what you mean. I haven’t exactly got that many people arrested."
-        show brent confused with dissolve
+
+    show brent confused with dissolve
+
         ghepetto "You wouldn’t be aware obviously. Like I said, humanity is ignorant unless it’s in their interest."
         "Who the hell was this guy? Why’s he telling us his manifesto?"
-    
+
     ghepetto "But enough about that, let’s get this started. I’m sure you’re dying to know what will happen to Chambers, no?"
     play sound metal_wheels
     "*CLANK* *CLANK*"
     "That sounds like metal..."
     "We look back at the room, there’s another figure standing behind the three men."
     brent "What the hell’s that?"
+
     show brent confused with dissolve
+
     ghepetto "Let’s just say it really wants to know the inside of Chambers."
+
     show ghepetto with dissolve
+
     "Inside?"
     "INSIDE?!"
     allan "I don’t like the sound of that!"
     "Brent and I rush in."
     "There’s no stairs leading to the room from our end, but there is at the end of the building."
     brent "Allan, up!"
+
     show brent surprised with dissolve
+
     "I look up, and I see metal bars falling over us!"
     "We dodge in time, and I look up to see some figure looking over us."
     allan "What the hell’s that?"
     brent "I don’t know, just run!"
+
     show brent thinking with dissolve
+
     "We rush to the stair and get our butss moving then-"
-    scene bg black with screenwipe
+    scene bg black with screenWipe
     "The lights go out."
     allan "Crap! I can’t see!"
     "I could hear more metal clanking, it’s coming from above us."
@@ -2019,7 +2236,9 @@ label writeContinue:
     "We bolt out and head up the stairs."
     "Clanks and more clanks came from behind us."
     brent "Whatever that thing is, it’s not human!"
+
     show brent surprised with dissolve
+
     "I turn to my left and I see metal barrels."
     "Could I...?"
 
@@ -2047,7 +2266,8 @@ label toppleBarrels:
     "Its smile is the last thing I remember before the barrel is thrown to my face."
 
     "GAME OVER"
-    scene bg gameOver with fadelong
+
+    scene bg gameOver with longFade
 
     return
 
@@ -2075,13 +2295,14 @@ label leaveBarrels:
     "Just three bodies with no skin, no jaw, and no clothes."
 
     # Chapter 3:
-    scene bg streets with dissolvelong    
+    scene bg streets with longDissolve
     show simon mad with dissolve:
         xanchor 0.5
         xpos 0.5
     show brent neutral with dissolve:
         xanchor 0.5
         xpos 0.75
+
     leblanc "..."
     brent "..."
     allan "..."
@@ -2094,11 +2315,15 @@ label leaveBarrels:
     leblanc "That happens to involve the murder of the Ghepetto Killer?"
     allan "Look, I can vouch for him, we’re just doing a case."
     leblanc "Sorry, boy, but you don’t exactly get a say in this. You’re just as suspicious."
+
     show brent confused with dissolve
+
     brent "Suspicious?!"
     leblanc "Look, I’m just doing my job. Right now you two are potential suspects. I’m not saying you are, but you are potentially."
     allan "Well, we’re not! Ask Chambers’ receptionist, we wouldn’t have enough time to get their skin off in 2 hours!"
+
     show simon neutral with dissolve
+
     leblanc "How do you know the victim was Chambers?"
     "I flinch."
     brent "You don’t know it’s Chambers and his bodyguards?"
@@ -2121,30 +2346,40 @@ label leaveBarrels:
     "I look at the paer, five people in the list."
     brent "Why the missing people report?"
     allan "I have a hunch."
+
     hide brent
-    scene bg cafe with dissolvelong
+    scene bg cafe with longDissolve
+
     "The next day..."
     "Brent and I meet up with Maybelle at the cafe from two days ago."
-    "She has the log book with her."    
+    "She has the log book with her."
+
     show maybelle happy with dissolve:
         xanchor 0.5
         xpos 0.5
     show brent neutral with dissolve:
         xanchor 0.5
         xpos 0.75
+
     allan "Thanks, we really need this."
     maybelle "Anything to help."
     "I take the log book out of her hands and look over the clients again."
     "And as luck, or rather bad luck, would have it..."
     "The five missing persons are in the list. All in a row."
-    show brent thinking
+
+    show brent thinking with dissolve
+
     brent "Bingo."
     brent "If these guys were killed by the Ghepetto Killer, then that means he’s targeting them specifically."
     allan "Okay, but why? And what connection does it have to Mr. Bradley?"
     brent "Well, I have one theory."
+
     show brent surprised with dissolve
+
     maybelle "Um, excuse me?"
+
     show maybelle neutral with dissolve
+
     "I flinch at Maybelle’s voice, we look up from the book and see her worried"
     "face."
     maybelle "Are the men in your list dead?"
@@ -2155,22 +2390,28 @@ label leaveBarrels:
     maybelle "And your theory is...?"
     show brent neutral
     brent "...I’m sorry, Ms. Bradley. But given the circumstances, I have to place your brother as a suspect. Everything that’s going here can’t be a coincidence."
+
     show maybelle confused with dissolve
+
     "Maybelle’s eyes turn dark."
     "*SMACK*"
     "She slaps Brent flat on the face and takes the book from me."
     maybelle "This is absurd! My brother wouldn’t go to such lengths!"
     "Brent rubs his face. You can actually see the hand mark on his cheek."
+
     show brent surprised with dissolve
+
     brent "How would you know that?"
     maybelle "Because he’s my brother! He would have told me if something was going on with him!"
     brent "Again, how would you know that?"
     "She doesn’t reply, instead..."
     "*SMACK*"
     "Another smack on his face. With that she leaves the cafe."
+
     hide maybelle
     show brent neutral with dissolve:
         ease 1.5 xpos 0.5
+
     allan "Well, that went well..."
     brent "Yeah, totally."
     allan "Can you really suspect her brother? Maybe it IS just a coincidence."
@@ -2200,7 +2441,9 @@ label leaveBarrels:
     "He says it with a bit too much enthusiasm..."
     allan "That explains why they were hiring the Bishops to intimidate people."
     henry "Found that out too, but that’s not all. They all went to the same neurological doctor."
+
     show brent thinking with dissolve
+
     brent "Neurological doctor?"
     henry "Yup, don’t know why, though. Here’s the name of the doctor and his address."
     "He hands us a piece of paper and I take it."
@@ -2217,7 +2460,7 @@ label leaveBarrels:
     allan "Well, we got an address. I say we head there."
     "Brent nods and we head out."
     # Scene 2
-    scene bg streets with screenwipe
+    scene bg streets with screenWipe
     "It’s at a slum."
     "How the hell does a neuro doctor live in a place like this?"
     "Is he not making enough money?"
@@ -2246,7 +2489,9 @@ label leaveBarrels:
     "The doctor picks a book from his cabinet and goes through it."
     doctor "Here we are! Hugo Chambers, about two years ago."
     "We go over to the doctor and sure enough he was there."
+
     show brent thinking with dissolve
+
     brent "Was he with a bunch of other people around his age?"
     doctor "No, just some young fellow. Very charming."
     "Hawkins, I’m assuming."
@@ -2265,7 +2510,9 @@ label leaveBarrels:
     "Brent pulls me away far from the doctor’s ear."
     brent "Hawkins, doesn’t specialize in a science like neuroscience in anyway. He runs a railroad, there’s no way he would need this."
     allan "Okay, but why?"
+
     show brent thinking with dissolve
+
     brent "I don’t know, but..."
     "Brent takes out a paper, it’s the list of the other clients in Lewis’ log book."
     brent "I do know the other guys have something to do with it, and I know they’re next."
@@ -2285,9 +2532,11 @@ label leaveBarrels:
     allan "Every building in London has one, don’t they?"
     brent "Seems like it."
     "We climb the stairs and luckily enough the window is unlocked. We climb in."
-    scene bg newOffice with screenwipe
+    scene bg newOffice with screenWipe
     "I expected it to be a hallway, but it isn’t, it’s an office."
+
     show brent confused with dissolve
+
     brent "Who’s..."
     "I grabbed the plaque, it reads, 'Elliot Hayes, CEO.'"
     allan "Son of a gun has his own fire escape..."
@@ -2310,7 +2559,7 @@ label leaveBarrels:
     allan "I don’t know, can it be that harmful?"
     "Brent shrugs and puts the book back the way he found it."
     "We leave the office, we have a good look at the factory."
-    scene bg factory with screenwipe
+    scene bg factory with screenWipe
     "I look down, there’s a candle there that’s lit."
     "That’s where I see him."
     allan "Hayes."
@@ -2335,9 +2584,9 @@ label leaveBarrels:
     "I gulp, and I look at Brent, who has a conflicted look on his face."
     hayes "We need to tell the police! But we need to cover our tracks first to not get arrested."
     "Arrested? Okay, what the hell did these guys do?!"
-    
+
     play sound metal_wheels
-    
+
     "Ours eyes widen, and Hayes stays dead silent."
     "The drain opened up, it’s lid pushed aside."
     "Then something climbs up, poking its head out."
@@ -2354,17 +2603,21 @@ label leaveBarrels:
     "Brent bolts out and I gather my composure. I start running too."
     "We look down the drain, the robot didn’t bother to cover the hole."
     brent "Time to jump, it looks like it’s not that far."
+
     show brent confused with dissolve
+
     "Brent jumps down and I get ready."
     "But before that I look up."
     "It’s a poster, a machine convention hosted by Hayes’ company."
     "In Dublin, Ireland."
     brent "Allan!"
+
     show brent surprised with dissolve
+
     "I look down, now’s not the time for that."
     "I jump down, but I can’t help but let the memories flood back into me."
     # Scene 3
-    scene cg steampunkT with dissolvelong
+    scene cg steampunkT with longDissolve
     "It was a few years in when I first worked at the gazette."
     "I was going to visit some relatives for a family reunion in Ireland."
     "Since you can’t get to Ireland from London, I had to get a connecting trip to Wales."
@@ -2374,7 +2627,7 @@ label leaveBarrels:
     "And I was up pretty late last night to finish a report."
     "I was very sleepy and I knew I needed to catch some sleep."
     "I had the ticket at hand, but I needed to decide where should I keep it while I sleep."
-    
+
     menu:
         "Bag":
             $ put = "Bag"
@@ -2383,7 +2636,7 @@ label leaveBarrels:
         "Pocket":
             $ put = "Pocket"
             jump putPocket
-        
+
 label putBag:
     $ put = "Bag"
     "Bag’s a safe place, can’t go wrong there."
@@ -2434,7 +2687,8 @@ label putPocket:
 label putContinue:
 
     # Scene 4:
-    scene bg sewers with dissolvelong
+    scene bg sewers with longDissolve
+
     "Ugh, no time for flashbacks!"
     "Brent and I are still chasing this thing!"
     "We go deep down the sewers, following the sounds of thumping metal."
@@ -2450,32 +2704,43 @@ label putContinue:
     "Brent just shrugs, and goes up the ladder."
     "I follow close behind him."
     "We’re inside another building. It looks abandoned too. Lights are off as well."
-    scene bg black with dissolvelong
+
+    scene bg black with longDissolve
+
     unknown "So you’ve made it."
-    scene bg warehouse with screenwipe
+
+    scene bg warehouse with screenWipe
+
     "The lights turn on, and standing on a platform above is the Ghepetto Killer."
+
     show ghepetto with dissolve:
         xanchor 0.5
         xpos 0.5
+
     ghepetto "I'm sure you’ve seen my little masterpiece."
     "He points somewhere behind us and we follow his finger."
     "The robot is standing, it’s smile creepy as ever."
     "And the body of Hayes hanging limp off of his arm."
+
     show ghepetto with dissolve:
         xanchor 0.5
         ease 1.5 xpos 0.25
+
     show brent surprised with dissolve:
         xanchor 0.5
         xpos 0.75
+
     brent "What are you going to do with him?"
     ghepetto "Now, now, don’t worry. He’ll be fine. I’ll be simply..."
     ghepetto "Sending him where he belongs."
     brent "And where’s that?"
     ghepetto "..."
+
     show brent neutral
+
     brent "...You’re not gonna talk, are you?"
     ghepetto "Now, now, some things must be kept outside of the public."
-    
+
     if put == "Pocket":
         ghepetto "Much like your relation to Ben Carter."
         "Ben Carter..."
@@ -2483,23 +2748,28 @@ label putContinue:
         "I look over to Brent, he doesn’t seem to react much."
         brent "What do you know about us?"
         ghepetto "More than you think"
-    
-    
+
+
     ghepetto "But enough about that!"
     "He snaps his fingers and then-"
     "*FLICK*"
-    scene bg black with screenwipe
+
+    scene bg black with screenWipe
+
     "The lights go out again!"
     ghepetto "Let’s see if you can save him before I take my leave!"
     "I hear metal thumping echo in the building at a rapid pace."
     "That robot must be running with the Hayes."
     allan "Brent, let’s go!"
     brent "R-right!"
+
     hide brent
+
     "Standing around darkness so much helped my eyes see through it."
     "I can make out some stairs and we go up them."
+
     play sound radio_noise
-    "*BZZT* *BZZZT*"
+
     allan "What the hell’s that?"
     brent "Must be the speakers!"
     ghepetto "You two may want to run fast."
@@ -2517,7 +2787,7 @@ label putContinue:
         ghepetto "’We’re like brothers’ I believe is what he said to you. He had so much trust in you and you repaid him with a jail cell. Isn’t that sweet?"
         brent "I said shut up!"
         "The Ghepetto Killer laughs again as Bent keeps yelling at him."
-        
+
     brent "Do you think this is some game to you?! Is it?!"
     "Brent stops in place and just yells in to the darkness."
     brent "You’re toying with human lives, enacting your own wicked sense of justice! You don’t get the right to decide that!"
@@ -2526,7 +2796,7 @@ label putContinue:
     "I look up, and though it’s dark I can make out a shape falling over Brent."
     "Cylindrical."
     "Metal barrels!"
-    
+
     menu:
         "Warn Brent.":
             jump warnBrent
@@ -2542,12 +2812,12 @@ label pushBrent:
 
     "GAME OVER"
 
-    scene bg gameOver with fadelong
-    
+    scene bg gameOver with longFade
+
     return
 
 label warnBrent:
-    
+
     allan "Brent, up!"
     "That registered to his head."
     "He looked up and quickly dodged over to me."
@@ -2603,7 +2873,7 @@ label warnBrent:
     allan "Wait, Maybelle said she hired you to find him after he went missing, how do you know what his voice sounds like?"
     brent "Oh, he made some tapes talking about his works. I watched it to see what he looks like. Interesting stuff, let me tell you."
     "Huh, convenient."
-    
+
     if pocket:
 
         allan "He also mentioned Ben Carter. Do you know him?"
@@ -2618,7 +2888,7 @@ label warnBrent:
         "Ticket..."
         "Wait, I lost my ticket."
         "Did he escape on the same day I was supposed to leave?"
-    
+
     play sound phone_ring
 
     allan "Oh, that’s my phone."
@@ -2746,7 +3016,7 @@ label warnBrent:
 
     if toldMom && wroteTo == "Clark" && pocket:
         $ chosenRoute = "Accomplice"
-        
+
     elif (toldMom && wroteTo == "Queen") || (!toldMom && wroteTo == "Queen" && pocket):
         $ chosenRoute = "Lewis"
 
@@ -2755,7 +3025,7 @@ label warnBrent:
 
     elif (!toldMom && put == "Bag"):
         $ chosenRoute = "Simon"
-        
+
     if (chosenRoute == "Accomplice") || (chosenRoute == "Lewis"):
         "There’s a bunch of tapes."
         "And a journal?"
@@ -2768,12 +3038,12 @@ label warnBrent:
         "It actually feels like a diary."
         journal "Those bastards! If I knew they were kidnapping human beings I would’ve said ‘no’ from the start! I can’t keep working for them, I need to get out of here."
         journal "I’m leaving for Dublin, if I can meet a lawyer there he can help me expose them and get out of the contract. I have the day off tomorrow and no one’s going to keep an eye on me."
-        
+
         if put == "Bag":
             journal "I was wrong. I was very wrong."
             journal "I couldn’t get on the train on time and the Bishops had me taken away."
             journal "I tried calling the police for help...but they didn’t bat an eye to me. Not one."
-        
+
         elif put == "Pocket":
             hawkins "I made it to Dublin. All I have to do is arrange a meeting with a good enough lawyer, I should have enough money to pay them."
             journal "FUCK. The Bishops found me!"
@@ -2808,7 +3078,9 @@ label warnBrent:
     # --(After interaction or if the player is NOT on the Lewis or Accomplice route)
     "I grab a tape from the pile."
     "I look for a nearby TV and play the tape in the player."
-    "*FLICK*"
+
+    play sound remote_click
+
     "The video plays..."
     "There’s a man standing there."
     unknown "Hello, my name is Lewis Bradley."
@@ -2860,7 +3132,9 @@ label warnBrent:
         "I pick the lock, I may not be that good as Brent, but it doesn’t hurt to try."
         "..."
         "..."
-        "*CLICK*"
+
+        play door_close
+
         "Hell yeah!"
         "I open the door and go in."
         "Not much in here, just a quaint little home."
@@ -2888,14 +3162,14 @@ label warnBrent:
         "...Oh thank god! There’s an entry with a mention of a girl here."
         "Okay..."
         diary "Lewis met a girl today during his work. She’s really nice...but..."
-        diary "I can’t help but notice she’s very touchy with Lewis.Actually, she’s really touchy with him. She always makes an effort to grab a hold of his arm whenever she can."
+        diary "I can’t help but notice she’s very touchy with Lewis. Actually, she’s really touchy with him. She always makes an effort to grab a hold of his arm whenever she can."
         "...Slowly getting scared."
         diary "Only I’m allowed to do that, you bitch."
         "THIS CAME OUT OF MAYBELLE’S MIND?!"
         "That nice girl who’s only out of character trait I’ve seen all day is her slapping Brent’s face."
         "THIS CAME OUT OF HER MIND?!"
         diary "That girl won’t be bothering my brother anymore. I was able to convince her that my brother is off limits at the moment."
-        "Define 'convince'???"
+        "Define {i}convince{/i}???"
         "Shit..."
         "She’s not...in love with her brother..."
         "Is she?"
@@ -2917,12 +3191,14 @@ label warnBrent:
         "God knows what she does near that when she’s writing about her brother."
         "That being said, I never thought it was possible."
         "As much as I don’t want to think about it... could the Ghepetto Killer be..."
-        "*CREEEEAK*"
+
+        play door_creak
+
         "That came from downstairs!"
         "Shit, Maybelle is home!"
         "I don’t have time to get out of here, I need to hide until I can escape."
         "But where?"
-        
+
         menu:
             "Outside the window":
                 jump hideWindow
@@ -2950,29 +3226,47 @@ label hideWindow:
     "I head to the door but my eyes dart to the vanity mirror."
     "Wait..."
     "Wasn’t there a desk lamp there?"
-    "*CREEEAK* *THUMP* *THUMP* *THUMP*"
+
+    play sound footsteps
+
     "I turn around to the sound of the footsteps...."
     "To be greeted by Maybelle and a swing from her lamp."
-    "*CRASH*"
+
+    play sound metal_bang
+
     "The lamp shatters upon hitting my head and I fell on the floor, holding it in pain."
     "The diary falls from my hands and I try to grab it, but Maybelle’s foot stops me."
+
+    show maybelle mad with dissolve
+
     maybelle "I can’t believe you read it."
     "Her voice is dark and monotone, absolutely no emotion in it."
     maybelle "So, did you figure it out?"
     "I groan in pain, I can’t reply."
+
+    show maybelle very mad with dissolve
+
     maybelle "I was going to let you live, Allan. You are innocent, and I did really like you."
     "She smiles at me, but somehow I feel no warmth seeing it."
     "Only fear."
+
+    show maybelle neutral with dissolve
+
     maybelle "But you know too much, I can’t let you go. I’ll just tell Mr. Norton you ran away in the last second."
     "Maybelle retrieves something from her bag."
     "It’s a knife."
     "I try to get on my feet or crawl, or anything to get out."
     "But she stabs the knife onto my leg and I groan again."
     maybelle "Now, now, don’t leave."
+
+    show maybelle happy with dissolve
+
     maybelle "I did say I like you. I’m gonna have my fun with you before you ‘go’."
     "She smiles at me, and it gives me the same feeling the robot did."
-    
+
     "GAMEOVER"
+
+    scene bg gameOver with longDissolve
 
     return
 
@@ -2988,7 +3282,12 @@ label hideCloset:
     "Shit, shit, SHIT!"
     "She’s getting closer!"
     "SHe reaches for the handle-"
-    "*RIIIIIIING*"
+
+    play sound phone_ring
+    show maybelle confused with dissolve:
+        xanchor 0.5
+        xpos    0.5
+
     maybelle "Oh, the phone."
     "She retracts her hand and leaves the room."
     "Did...did I just get a lucky break??"
@@ -3005,7 +3304,7 @@ label hideCloset:
     "I give him my dad’s number and I bolt it out the house."
     "My dad will get pissed, but it’s for a good reason!"
     "I run and head straight for the cafe where I would meet Brent."
-        
+
     # --(If the player is NOT on the Maybelle route or the Accomplice Route)-------
     if (chosenRoute != "Maybelle") && (chosenRoute != "Accomplice"):
         "It takes me two hours to get to the Bradley’s home."
@@ -3031,7 +3330,7 @@ label hideCloset:
     if chosenRoute == "Lewis":
         "Not that I need any clues. I got more than enough but..."
         "Can I really tell her?"
-        
+
     maybelle "To be honest, I wanted to apologize."
     allan "To Brent?"
     maybelle "Yes, I shouldn’t have slapped him. He’s just doing his job as an investigator."
@@ -3180,12 +3479,12 @@ label hideCloset:
         brent "And apparently Simon’s been stressed lately."
         brent "Crime has significantly increased during the industrialization and many other people are doing a lot of shady business. Like Carter and the Opium incident."
         brent "A lot of people in the police force have noticed he’s unhinged lately, and some others have began to think he was planting evidence on criminals."
-        allan "For real? That’s illegal, right?"   
+        allan "For real? That’s illegal, right?"
         brent "It is. I have noticed Simon has been a little too zealous with his detective work after the Carter incident."
         "I honestly couldn’t exactly see LeBlanc having to stoop that low for the sake of capturing the criminal."
         "Though all of this could just not have to anything with each other."
         "...Right?"
-        
+
     # --(If the player is on the "Accomplice Route")-----------------------------------------
     if chosenRoute == "Accomplice":
         allan "Okay, calm down, did you find anything about LeBlanc?"
@@ -3247,7 +3546,7 @@ label hideCloset:
         allan "Businessmen? You don’t think there were MORE people  in that project, do you?"
         brent "Possibly, Hawkins never mentioned how many people were involved, it’s most likely the ones Ben killed hadn’t contributed to the project yet."
         "Jesus Christ, how deep does this rabbit hole go? For all I know the Queen is part of this too!"
-        
+
     # ----------------------------------------------------------------------------------------------------
     brent "Anyway, what we have right now are just theories and speculation."
     allan "Right, I guess we won’t know until we go with Hawkins, will we?"
@@ -3321,13 +3620,13 @@ label hideCloset:
 
     if chosenRoute == "Maybelle":
         jump maybelleRoute
-    
+
     elif chosenRoute == "Accomplice":
         jump accompliceRoute
 
     elif chosenRoute == "LewisRoute":
         jump LewisRoute
-    
+
     elif chosenRoute == "simonRoute":
         jump simonRoute
 
@@ -3390,7 +3689,7 @@ label maybelleRoute:
     "We stand in the hall-"
     "Damn it! I forgot how much of a maze this place is!"
     "Which way’s the exit?"
-    
+
     menu:
         "Right, Right, Left, Forward, Forward, Left.":
             "We take a right-"
@@ -3403,9 +3702,9 @@ label maybelleRoute:
             "ANd we only wait for them to come to us."
             "GAME OVER."
 
-            scene bg gameOver with fadelong
+            scene bg gameOver with longFade
 
-            return 
+            return
 
         "Left, Left, Right, Forward, Forward, Right.":
             pass
@@ -3654,9 +3953,9 @@ label lewisRoute:
             "The robots cornered us in the back."
             "ANd we only wait for them to come to us."
             "GAME OVER."
-            scene bg gameOver with fadelong
+            scene bg gameOver with longFade
             return
-            
+
         "Left, Left, Right, Forward, Forward, Right.":
             pass
 
@@ -3666,7 +3965,7 @@ label lewisRoute:
     "We make it to the lobby room."
     brent "We’re almost out of time, run!"
     "With all of our strength, we leap towards the door."
-    
+
     # Scene 2
     "We land hard on the dirt."
     "Then the building explodes behind us in a blaze of..."
@@ -3850,9 +4149,9 @@ label leblancRoute:
     dawson "What will that information do for you? I got all three of you cornered!"
     "He throws his hands in the air and looks up to the roof."
     dawson "I can’t exactly leave any witnesses today, now can I? I will become immortal, no one can st-"
-    
+
     play sound gun_shot
-    
+
     "His hand is stained red, and there’s a visible hole through it."
     "Standing in the platform, LeBlanc had his gun pointed at him."
     dawson "You! Why would you-"
@@ -3903,7 +4202,7 @@ label leblancRoute:
     "We stand in the hall-"
     "Damn it! I forgot how much of a maze this place is!"
     "Which way’s the exit?"
-    
+
     menu:
         "Right, Right, Left, Forward, Forward, Left.":
             "We take a right-"
@@ -3915,7 +4214,7 @@ label leblancRoute:
             "The robots cornered us in the back."
             "ANd we only wait for them to come to us."
             "GAME OVER."
-            scene bg gameOver with fadelong
+            scene bg gameOver with longFade
 
             return
 
@@ -3928,9 +4227,9 @@ label leblancRoute:
     "We make it to the lobby room."
     brent "We’re almost out of time, run!"
     "With all of our strength, we leap towards the door."
-    
+
     # Scene 2:
-    scene bg 
+    scene bg
     "We land hard on the dirt."
     "Then the building explodes behind us in a blaze of..."
     "I want to say glory but..."
@@ -3940,9 +4239,9 @@ label leblancRoute:
     allan "Are you alright, Lewis?"
     lewis "I’m fine. A bit sore, but I’ll manage."
     brent "Let’s get you to a hospital. Then we’ll call the police to report-"
-    
+
     play sound gun_sh
-    
+
     "Brent stops talking."
     "His shirt is stained red."
     "He holds his chest, and he falls on the ground."
@@ -3961,7 +4260,7 @@ label leblancRoute:
     "All I could see was him, the man who shot my best friend."
     "My vision goes blurry, and it feels like all I could see is red."
     "I pull the trigger."
-    
+
     play sound gun_empty
 
     allan "What?"
@@ -4097,9 +4396,9 @@ label accompliceRoute:
     "He opens his eyes and looks at us."
     lewis "Who..."
     brent "I’m a detective, and this is my partner. You’re sister hired me to find y-."
-    
+
     play sound metal_bang
-    
+
     "Brent was smacked hard on the face!"
     "With a wrench."
     "By Lewis."
@@ -4174,6 +4473,7 @@ label accompliceRoute:
     "We stand in the hall-"
     "Damn it! I forgot how much of a maze this place is!"
     "Which way’s the exit?"
+
     menu:
         "Right, Right, Left, Forward, Forward, Left.":
             "We take a right-"
@@ -4185,12 +4485,12 @@ label accompliceRoute:
             "The robots cornered us in the back."
             "ANd we only wait for them to come to us."
             "GAME OVER."
-            scene bg gameOver with fadelong
+            scene bg gameOver with longFade
             return
 
         "Left, Left, Right, Forward, Forward, Right.":
             pass
-            
+
     "Right, reverse."
     "We’re facing the other way."
     "We take those directions, we hear the robots behind us, but thanks to pure adrenaline we can outrun them."
@@ -4212,15 +4512,15 @@ label accompliceRoute:
     "..."
     allan "The Bradleys!"
     brent "Oh, crap! We need to find-"
-    
+
     play sound phone_ring
-    
+
     "We look at the road, and soon the fire department and the police make it to us."
     "LeBlanc stands with them as he approaches us."
     leblanc "You two again?!"
     "We were surrounded."
     "With a weary smile, we raised our hands in the air."
-    scene bg black with dissolvelong
+    scene bg black with longDissolve
     "..."
     "..."
     "Huh?"
